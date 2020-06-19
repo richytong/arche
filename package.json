@@ -1,0 +1,10 @@
+{
+  "name": "arche",
+  "version": "0.0.0",
+  "description": "🏛 React components in pure JavaScript",
+  "author": "Richard Tong",
+  "license": "MIT",
+  "main": "index.js",
+  "homepage": "https://github.com/richytong/collagen",
+  "keywords": []
+}
