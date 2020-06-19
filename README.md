@@ -1,5 +1,5 @@
 # Arche
-🌄 React without JSX
+🌄 React in pure JS
 
 ```javascript
 const P = Arche('p')
