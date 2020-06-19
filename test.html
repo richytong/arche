@@ -2,11 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>test</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="index.js"></script>
 </head>
-<body>
-
-<script src="index.js"></script>
-
-</body>
+<script>
+  const Div = Arche('div')
+  const d = Div()
+  console.log(
+    d['$$typeof'],
+    Symbol.for('react.element'),
+    'isReact',
+    d['$$typeof'] === Symbol.for('react.element'),
+  )
+</script>
+<body></body>
 </html>
