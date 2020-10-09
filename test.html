@@ -3,18 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>test</title>
-  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-  <script src="index.js"></script>
+  <script src="https://unpkg.com/react@16.13.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="/index.js"></script>
 </head>
+<body>
+  <div id="example"></div>
+</body>
 <script>
-  const Div = Arche('div')
-  const d = Div()
-  console.log(
-    d['$$typeof'],
-    Symbol.for('react.element'),
-    'isReact',
-    d['$$typeof'] === Symbol.for('react.element'),
-  )
+const ReactElement = Arche(React)
+const { Div, P, Button } = ReactElement
+const { useState } = React
+
+const Example = ReactElement(() => {
+  const [count, setCount] = useState(0)
+  return Div([
+    P('Success!'),
+    P(`You clicked ${count} times`),
+    Button({
+      onClick() {
+        setCount(count + 1)
+      },
+    }, 'Click me'),
+  ])
+})
+
+ReactDOM.render(Example(), document.getElementById('example'))
+
 </script>
-<body></body>
 </html>
