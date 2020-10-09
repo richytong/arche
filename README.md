@@ -39,9 +39,9 @@ Create dynamic components with props:
 // } => userCard ReactElement
 const UserCard = ReactElement(({
   firstName, lastName, age,
-}) => Div([
+}) => Div({ className: 'user-card' }, [
   H1(`${firstName} ${lastName}`),
-  P({ style: { color: 'lightgrey' } }, [age]),
+  P(`age: ${age}`),
 ]))
 ```
 
