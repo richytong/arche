@@ -1,28 +1,2 @@
 # Arche
-🌄 React in pure JS
-
-```javascript
-const P = Arche('p')
-const Div = Arche('div')
-const Button = Arche('button')
-
-const Clicker = e(({ message }) => {
-  const [clicked, setClicked] = React.useState(0)
-  return Div({
-    id: 'clicker',
-    style: styles.div,
-  }, [
-    P(null, [`${message}: clicked ${clicked} times`]),
-    Button({
-      onClick: () => {
-        setClicked(clicked + 1)
-      },
-    }, ['click']),
-  ])
-})
-
-ReactDOM.render(
-  Clicker({ message: 'You got this!' }),
-  document.getElementById('root'),
-)
-```
+> Arche (/ˈɑːrki/; Ancient Greek: ἀρχή) is a Greek word with primary senses "beginning", "origin" or "source of action" (ἐξ' ἀρχῆς: from the beginning, οr ἐξ' ἀρχῆς λόγος: the original argument), and later "first principle" or "element". ([wikipedia](https://en.wikipedia.org/wiki/Arche))
