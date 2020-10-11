@@ -1,8 +1,8 @@
 /**
- * Arche v0.1.0
+ * Arche v0.1.3
  * https://github.com/richytong/arche
- * (c) 2019-2020 Richard Tong
- * rubico may be freely distributed under the MIT license.
+ * (c) 2020 Richard Tong
+ * Arche may be freely distributed under the MIT license.
  */
 
 const isArray = Array.isArray
