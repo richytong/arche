@@ -9,6 +9,7 @@
 </head>
 <body>
   <div id="example"></div>
+  <div id="dom-example"></div>
 </body>
 <script>
 const ReactElement = Arche(React)
@@ -18,7 +19,7 @@ const { useState } = React
 const Example = ReactElement(() => {
   const [count, setCount] = useState(0)
   return Div([
-    P('Success!'),
+    P('Success! - React'),
     P(`You clicked ${count} times`),
     Button({
       onClick() {
@@ -29,6 +30,19 @@ const Example = ReactElement(() => {
 })
 
 ReactDOM.render(Example(), document.getElementById('example'))
+
+const DOMElement = Arche(document)
+
+const domExample = DOMElement.Div([
+  DOMElement.P('Success! - DOMElement'),
+  DOMElement.Ul({ id: 'pink-list', style: { backgroundColor: 'pink' } }, [
+    DOMElement.Li('Item 1'),
+    DOMElement.Li('Item 2'),
+    DOMElement.Li('Item 3'),
+  ]),
+])
+
+document.getElementById('dom-example').appendChild(domExample)
 
 </script>
 </html>

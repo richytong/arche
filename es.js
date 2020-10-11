@@ -1,15 +1,9 @@
 /**
  * Arche v0.0.1
  * https://github.com/richytong/arche
- * (c) 2020 Richard Tong
- * Arche may be freely distributed under the MIT license.
+ * (c) 2019-2020 Richard Tong
+ * rubico may be freely distributed under the MIT license.
  */
-
-(function (root, Arche) {
-  if (typeof module == 'object') (module.exports = Arche) // CommonJS
-  else if (typeof define == 'function') define(() => Arche) // AMD
-  else (root.Arche = Arche) // Browser
-}(typeof globalThis == 'object' ? globalThis : this, (function () { 'use strict'
 
 const isArray = Array.isArray
 
@@ -240,5 +234,5 @@ const Arche = function (creator) {
 
   return rootElement
 }
-return Arche
-}())))
+
+export default Arche

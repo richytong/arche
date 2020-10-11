@@ -1,18 +1,21 @@
 {
   "name": "arche",
   "version": "0.0.1",
-  "description": "React Components at runtime",
+  "description": "HTML as JavaScript",
   "author": "Richard Tong",
   "license": "MIT",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "github:a-synchronous/rubico"
+    "url": "github:richytong/arche"
   },
   "homepage": "https://github.com/richytong/arche",
   "keywords": [
     "react",
-    "reactjs"
+    "reactjs",
+    "buildless",
+    "elements",
+    "components"
   ],
   "devDependencies": {
     "serve": "^11.3.2"
