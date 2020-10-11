@@ -63,3 +63,19 @@ const Example = ReactElement(() => {
   ])
 })
 ```
+
+# Installation
+with `npm`
+```bash
+npm i arche
+```
+
+browser script, global `Arche`
+```html
+<script src="https://unpkg.com/arche"></script>
+```
+
+browser module
+```javascript
+import Arche from 'https://unpkg.com/arche/es.js'
+```
