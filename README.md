@@ -17,18 +17,12 @@ const myElement = Div([
   P('lorem ipsum'),
 ])
 
-console.log(myElement)
-// {
-//   $$typeof: Symbol(react.element),
-//   type: 'div',
-//   props: {
-//     children: [
-//       { $$typeof: Symbol(react.element), type: 'h1', props: { children: 'I am a heading' } },
-//       { $$typeof: Symbol(react.element), type: 'p', props: { children: 'heyo' } },
-//       { $$typeof: Symbol(react.element), type: 'p', props: { children: 'heyo' } },
-//     ],
-//   },
-// }
+render(myElement)
+// <div>
+//   <h1>I am a heading</h1>
+//   <p>heyo</p>
+//   <p>lorem ipsum</p>
+// </div>
 ```
 
 Create dynamic components with props:
@@ -40,8 +34,14 @@ const UserCard = ReactElement(({
   firstName, lastName, age,
 }) => Div([
   H1(`${firstName} ${lastName}`),
-  P({ style: { color: 'lightgrey' } }, [age]),
+  P({ style: { color: 'lightgrey' } }, `age: ${age}`),
 ]))
+
+render(UserCard({ firstName: 'George', lastName: 'Henry', age: 32 }))
+// <div>
+//   <h1>George Henry</h1>
+//   <p style="color: lightgrey">age: 32</p>
+// </div>
 ```
 
 Complete interop with React hooks (converted from [this example](https://reactjs.org/docs/hooks-intro.html)):
@@ -62,7 +62,15 @@ const Example = ReactElement(() => {
     }, 'Click me'),
   ])
 })
+
+render(Example())
+// <div>
+//   <p>You clicked {count} times</p>
+//   <button onclick="setCount(count + 1)">Click me</button>
+// </div>
 ```
+
+Proof of concept: [rubico.land](https://rubico.land/)
 
 # Installation
 with `npm`
