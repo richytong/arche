@@ -49,7 +49,7 @@ render(UserCard({ firstName: 'George', lastName: 'Henry', age: 32 }))
 // </div>
 ```
 
-Complete interop with React hooks (converted from [this example](https://reactjs.org/docs/hooks-intro.html)):
+Complete interoperability with React hooks (converted from [this example](https://reactjs.org/docs/hooks-intro.html)):
 ```javascript [playground]
 const ReactElement = Arche(React)
 const { Div, P, Button } = ReactElement
