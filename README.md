@@ -96,7 +96,7 @@ Element = Object
 
 var type string|function,
   props Object,
-  children string|Object|Array<string|Object>,
+  children string|Element|Array<string|Element>,
   element Element,
   creator { createElement: (type, props?, children?)=>element },
   rootElement type=>((props, children?)|children)=>element {
