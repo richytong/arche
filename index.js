@@ -28,10 +28,7 @@ const isArray = Array.isArray
  * ```
  */
 const elementSetAttribute = function (element, key, value) {
-  if (value == null) {
-    return element
-  }
-  if (value.constructor == Object) { // style
+  if (value != null && value.constructor == Object) { // style
     for (const subKey in value) {
       element[key][subKey] = value[subKey]
     }
@@ -203,6 +200,9 @@ const Arche = function (creator) {
     }
     if (isArray(arg1)) {
       return creatorCreateElement(creator, type, arg0, arg1)
+    }
+    if (arg1 == null) {
+      return creatorCreateElement(creator, type, arg0, [])
     }
     return creatorCreateElement(creator, type, arg0, [arg1])
   }
