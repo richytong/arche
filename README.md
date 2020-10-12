@@ -72,7 +72,7 @@ render(Example())
 // </div>
 ```
 
-Proof of concept: [rubico.land](https://rubico.land/)
+Proof of concept: [rubico.land](https://rubico.land/) ([github](https://github.com/a-synchronous/rubico.land))
 
 # Installation
 with `npm`
