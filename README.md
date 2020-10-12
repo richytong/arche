@@ -89,3 +89,49 @@ browser module
 ```javascript
 import Arche from 'https://unpkg.com/arche/es.js'
 ```
+
+# Syntax
+```coffeescript [specscript]
+Element = Object
+
+var type string|function,
+  props Object,
+  children string|Object|Array<string|Object>,
+  element Element,
+  creator { createElement: (type, props?, children?)=>element },
+  rootElement type=>((props, children?)|children)=>element {
+    Script: ((props, children?)|children)=>element,
+    Html: ((props, children?)|children)=>element,
+    Body: (props, children?)|children)=>element,
+    Section: (props, children?)|children)=>element,
+    Article: (props, children?)|children)=>element,
+    Span: (props, children?)|children)=>element,
+    Div: (props, children?)|children)=>element,
+    Img: (props, children?)|children)=>element,
+    H1: (props, children?)|children)=>element,
+    H2: (props, children?)|children)=>element,
+    H3: (props, children?)|children)=>element,
+    H4: (props, children?)|children)=>element,
+    H5: (props, children?)|children)=>element,
+    H6: (props, children?)|children)=>element,
+
+    A: (props, children?)|children)=>element,
+    P: (props, children?)|children)=>element,
+    B: (props, children?)|children)=>element,
+    Q: (props, children?)|children)=>element,
+    I: (props, children?)|children)=>element,
+    Ul: (props, children?)|children)=>element,
+    Ol: (props, children?)|children)=>element,
+    Li: (props, children?)|children)=>element,
+    Textarea: (props, children?)|children)=>element,
+    Button: (props, children?)|children)=>element,
+    Iframe: (props, children?)|children)=>element,
+    Blockquote: (props, children?)|children)=>element,
+    Br: (props, children?)|children)=>element,
+    Code: (props, children?)|children)=>element,
+    Pre: (props, children?)|children)=>element,
+  }
+
+Arche(creator) -> rootElement
+```
+
