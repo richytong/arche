@@ -139,3 +139,9 @@ var type string|function,
 Arche(creator) -> rootElement
 ```
 
+Don't see an element you need? Just create it!
+```javascript [playground]
+const ReactElement = Arche(React)
+
+const Aside = ReactElement('aside')
+```
