@@ -76,8 +76,6 @@ render(Example())
 // </div>
 ```
 
-Proof of concept: [rubico.land](https://rubico.land/) ([source code](https://github.com/a-synchronous/rubico.land/blob/master/Root.js))
-
 # Installation
 with `npm`
 ```bash
