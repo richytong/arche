@@ -1,7 +1,7 @@
 /**
- * Arche v0.1.3
+ * Arche v0.2.0
  * https://github.com/richytong/arche
- * (c) 2020 Richard Tong
+ * (c) 2020-2021 Richard Tong
  * Arche may be freely distributed under the MIT license.
  */
 
@@ -22,10 +22,7 @@ const isArray = Array.isArray
  * ```
  */
 const elementSetAttribute = function (element, key, value) {
-  if (value == null) {
-    return element
-  }
-  if (value.constructor == Object) { // style
+  if (value != null && value.constructor == Object) { // style
     for (const subKey in value) {
       element[key][subKey] = value[subKey]
     }
@@ -198,23 +195,11 @@ const Arche = function (creator) {
     if (isArray(arg1)) {
       return creatorCreateElement(creator, type, arg0, arg1)
     }
+    if (arg1 == null) {
+      return creatorCreateElement(creator, type, arg0, [])
+    }
     return creatorCreateElement(creator, type, arg0, [arg1])
   }
-
-  rootElement.Script = rootElement('script')
-  rootElement.Html = rootElement('html')
-  rootElement.Body = rootElement('body')
-  rootElement.Section = rootElement('section')
-  rootElement.Article = rootElement('article')
-  rootElement.Span = rootElement('span')
-  rootElement.Div = rootElement('div')
-  rootElement.Img = rootElement('img')
-  rootElement.H1 = rootElement('h1')
-  rootElement.H2 = rootElement('h2')
-  rootElement.H3 = rootElement('h3')
-  rootElement.H4 = rootElement('h4')
-  rootElement.H5 = rootElement('h5')
-  rootElement.H6 = rootElement('h6')
 
   rootElement.A = rootElement('a')
   rootElement.P = rootElement('p')
@@ -224,11 +209,39 @@ const Arche = function (creator) {
   rootElement.Ul = rootElement('ul')
   rootElement.Ol = rootElement('ol')
   rootElement.Li = rootElement('li')
+
+  rootElement.H1 = rootElement('h1')
+  rootElement.H2 = rootElement('h2')
+  rootElement.H3 = rootElement('h3')
+  rootElement.H4 = rootElement('h4')
+  rootElement.H5 = rootElement('h5')
+  rootElement.H6 = rootElement('h6')
+  rootElement.Hr = rootElement('hr')
+  rootElement.Br = rootElement('br')
+
+  rootElement.Script = rootElement('script')
+  rootElement.Html = rootElement('html')
+  rootElement.Body = rootElement('body')
+  rootElement.Nav = rootElement('nav')
+  rootElement.Section = rootElement('section')
+  rootElement.Article = rootElement('article')
+  rootElement.Footer = rootElement('footer')
+  rootElement.Span = rootElement('span')
+  rootElement.Div = rootElement('div')
+  rootElement.Img = rootElement('img')
+  rootElement.Video = rootElement('video')
+
+  rootElement.Form = rootElement('form')
+  rootElement.Fieldset = rootElement('fieldset')
+  rootElement.Input = rootElement('input')
+  rootElement.Label = rootElement('label')
   rootElement.Textarea = rootElement('textarea')
+  rootElement.Select = rootElement('select')
+  rootElement.Option = rootElement('option')
+
   rootElement.Button = rootElement('button')
   rootElement.Iframe = rootElement('iframe')
   rootElement.Blockquote = rootElement('blockquote')
-  rootElement.Br = rootElement('br')
   rootElement.Code = rootElement('code')
   rootElement.Pre = rootElement('pre')
 
