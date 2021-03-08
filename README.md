@@ -96,18 +96,20 @@ import Arche from 'https://unpkg.com/arche/es.js'
 ```coffeescript [specscript]
 Arche(React {
   createElement: (type, props?, children?)=>ReactElement,
-}) -> rootElement ReactElement
+}) -> ReactElement
 ```
 
 # Usage
 ```javascript
+const ReactElement = Arche(React)
+
 const {
   A, P, B, Q, I, Ul, Ol, Li,
   H1, H2, H3, H4, H5, H6, Hr, Br,
   Script, Html, Body, Nav, Section, Article, Footer, Span, Div, Img, Video,
   Form, Fieldset, Input, Label, Textarea, Select, Option,
   Button, Iframe, Blockquote, Code, Pre,
-} = Arche
+} = ReactElement
 ```
 
 Don't see an element you need? Just create it!
