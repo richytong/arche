@@ -118,3 +118,34 @@ const ReactElement = Arche(React)
 
 const Aside = ReactElement('aside')
 ```
+
+## Using React Context
+To use React Context with Arche, wrap `YourContext.Provider` with `ReactElement` and supply `value` as a prop, specifying children in the next argument.
+
+JSX example:
+```javascript
+function ArticleWrapper () {
+  const [theme, setTheme] = React.useState(themes[0])
+
+  return (
+    <ThemeContext.Provider value={{
+      theme,
+      changeTheme: setTheme
+    }}>
+      <ThemeSwitcher />
+      <Article />
+    </ThemeContext.Provider>
+  )
+}
+```
+
+Translates to the following with Arche:
+```javascript
+const ArticleWrapper = ReactElement(() => {
+  const [theme, setTheme] = React.useState(themes[0])
+
+  return ReactElement(ThemeContext.Provider)({
+    value: { theme, changeTheme: setTheme },
+  }, [ThemeSwitcher(), Article()])
+})
+```
