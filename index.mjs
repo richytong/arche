@@ -114,7 +114,9 @@ const creatorCreateElement = function (creator, type, props, children) {
  *     Pre: (props, children?)|children)=>element,
  *   }
  *
- * Arche(creator) -> rootElement
+ * Arche(creator, options {
+ *   styled?: Styled,
+ * }) -> rootElement
  * ```
  *
  * @description
@@ -184,22 +186,68 @@ const creatorCreateElement = function (creator, type, props, children) {
  * ```
  */
 
-const Arche = function (creator) {
-  const rootElement = type => function creatingElement(arg0, arg1) {
+const Arche = function (creator, options = {}) {
+  const { styled } = options
+
+  const originalRootElement = type => function creatingElement(arg0, arg1) {
     if (isArray(arg0)) {
       return creatorCreateElement(creator, type, {}, arg0)
     }
+
     if (typeof arg0 == 'string') {
       return creatorCreateElement(creator, type, {}, [arg0])
     }
+
     if (isArray(arg1)) {
       return creatorCreateElement(creator, type, arg0, arg1)
     }
+
     if (arg1 == null) {
       return creatorCreateElement(creator, type, arg0, [])
     }
+
     return creatorCreateElement(creator, type, arg0, [arg1])
   }
+
+  const styledRootElement = type => function creatingStyledElement(arg0, arg1) {
+    if (isArray(arg0)) {
+      return creatorCreateElement(creator, type, {}, arg0)
+    }
+
+    if (typeof arg0 == 'string') {
+      return creatorCreateElement(creator, type, {}, [arg0])
+    }
+
+    if (isArray(arg1)) {
+      if (arg0.css == null) {
+        return creatorCreateElement(creator, type, arg0, arg1)
+      }
+      const { css, ...props } = arg0
+      return creatorCreateElement(creator, styled[type](css), props, arg1)
+    }
+
+    if (arg1 == null) {
+      if (arg0.css == null) {
+        return creatorCreateElement(creator, type, arg0, [])
+      }
+      const { css, ...props } = arg0
+      return creatorCreateElement(creator, styled[type](css), props, [])
+    }
+
+    if (arg0.css == null) {
+      return creatorCreateElement(creator, type, arg0, [arg1])
+    }
+    const { css, ...props } = arg0
+    return creatorCreateElement(creator, styled[type](css), props, [arg1])
+  }
+
+  const rootElement = (
+    styled == null
+    ? originalRootElement
+    : type => typeof type == 'string'
+      ? styledRootElement(type)
+      : originalRootElement(type)
+  )
 
   rootElement.A = rootElement('a')
   rootElement.P = rootElement('p')

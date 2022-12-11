@@ -301,5 +301,6 @@ const Arche = function (creator, options = {}) {
 
   return rootElement
 }
+
 return Arche
 }())))
