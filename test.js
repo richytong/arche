@@ -73,16 +73,16 @@ describe('Arche', () => {
       },
     }
 
-    const identity = value => value
+    const get0 = value => value[0]
 
     const styled = {
-      h1: identity,
-      h2: identity,
-      div: identity,
-      p: identity,
-      b: identity,
-      span: identity,
-      article: identity,
+      h1: get0,
+      h2: get0,
+      div: get0,
+      p: get0,
+      b: get0,
+      span: get0,
+      article: get0,
     }
 
     const rootElement = Arche(mockReact, { styled })

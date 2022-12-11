@@ -229,7 +229,7 @@ const Arche = function (creator, options = {}) {
         return creatorCreateElement(creator, type, arg0, arg1)
       }
       const { css, ...props } = arg0
-      return creatorCreateElement(creator, styled[type](css), props, arg1)
+      return creatorCreateElement(creator, styled[type]([css]), props, arg1)
     }
 
     if (arg1 == null) {
@@ -237,14 +237,14 @@ const Arche = function (creator, options = {}) {
         return creatorCreateElement(creator, type, arg0, [])
       }
       const { css, ...props } = arg0
-      return creatorCreateElement(creator, styled[type](css), props, [])
+      return creatorCreateElement(creator, styled[type]([css]), props, [])
     }
 
     if (arg0.css == null) {
       return creatorCreateElement(creator, type, arg0, [arg1])
     }
     const { css, ...props } = arg0
-    return creatorCreateElement(creator, styled[type](css), props, [arg1])
+    return creatorCreateElement(creator, styled[type]([css]), props, [arg1])
   }
 
   const rootElement = (
