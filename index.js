@@ -39,6 +39,40 @@ const elementSetAttribute = function (element, key, value) {
 }
 
 /**
+ * @name memoizeCappedWithResolver
+ *
+ * @synopsis
+ * ```coffeescript [specscript]
+ * memoizeCappedWithResolver(
+ *   func function,
+ *   cap number,
+ *   resolver function,
+ * ) -> memoized function
+ * ```
+ *
+ * @description
+ * Memoize a function with a resolver. Clear cache when size reaches cap.
+ */
+
+const memoizeCappedWithResolver = function (func, cap, resolver) {
+  const cache = new Map()
+  const memoized = function (...args) {
+    if (cache.size > cap) {
+      cache.clear()
+    }
+    const key = resolver(...args)
+    if (cache.has(key)) {
+      return cache.get(key)
+    }
+    const result = func(...args)
+    cache.set(key, result)
+    return result
+  }
+  memoized.cache = cache
+  return memoized
+}
+
+/**
  * @name creatorCreateElement
  *
  * @synopsis
@@ -122,6 +156,7 @@ const creatorCreateElement = function (creator, type, props, children) {
  *
  * Arche(creator, options {
  *   styled?: Styled,
+ *   styledMemoizationCap: number,
  * }) -> rootElement
  * ```
  *
@@ -193,7 +228,10 @@ const creatorCreateElement = function (creator, type, props, children) {
  */
 
 const Arche = function (creator, options = {}) {
-  const { styled } = options
+  const {
+    styled,
+    styledMemoizationCap = 1000,
+  } = options
 
   const originalRootElement = type => function creatingElement(arg0, arg1) {
     if (isArray(arg0)) {
@@ -215,36 +253,44 @@ const Arche = function (creator, options = {}) {
     return creatorCreateElement(creator, type, arg0, [arg1])
   }
 
-  const styledRootElement = type => function creatingStyledElement(arg0, arg1) {
-    if (isArray(arg0)) {
-      return creatorCreateElement(creator, type, {}, arg0)
-    }
+  const styledRootElement = type => {
+    const styledComponent = memoizeCappedWithResolver(
+      styled[type],
+      styledMemoizationCap,
+      array => array[0],
+    )
 
-    if (typeof arg0 == 'string') {
-      return creatorCreateElement(creator, type, {}, [arg0])
-    }
+    return function creatingStyledElement(arg0, arg1) {
+      if (isArray(arg0)) {
+        return creatorCreateElement(creator, type, {}, arg0)
+      }
 
-    if (isArray(arg1)) {
+      if (typeof arg0 == 'string') {
+        return creatorCreateElement(creator, type, {}, [arg0])
+      }
+
+      if (isArray(arg1)) {
+        if (arg0.css == null) {
+          return creatorCreateElement(creator, type, arg0, arg1)
+        }
+        const { css, ...props } = arg0
+        return creatorCreateElement(creator, styledComponent([css]), props, arg1)
+      }
+
+      if (arg1 == null) {
+        if (arg0.css == null) {
+          return creatorCreateElement(creator, type, arg0, [])
+        }
+        const { css, ...props } = arg0
+        return creatorCreateElement(creator, styledComponent([css]), props, [])
+      }
+
       if (arg0.css == null) {
-        return creatorCreateElement(creator, type, arg0, arg1)
+        return creatorCreateElement(creator, type, arg0, [arg1])
       }
       const { css, ...props } = arg0
-      return creatorCreateElement(creator, styled[type]([css]), props, arg1)
+      return creatorCreateElement(creator, styledComponent([css]), props, [arg1])
     }
-
-    if (arg1 == null) {
-      if (arg0.css == null) {
-        return creatorCreateElement(creator, type, arg0, [])
-      }
-      const { css, ...props } = arg0
-      return creatorCreateElement(creator, styled[type]([css]), props, [])
-    }
-
-    if (arg0.css == null) {
-      return creatorCreateElement(creator, type, arg0, [arg1])
-    }
-    const { css, ...props } = arg0
-    return creatorCreateElement(creator, styled[type]([css]), props, [arg1])
   }
 
   const rootElement = (

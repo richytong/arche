@@ -85,12 +85,18 @@ describe('Arche', () => {
       article: get0,
     }
 
-    const rootElement = Arche(mockReact, { styled })
+    const rootElement = Arche(mockReact, {
+      styled,
+      styledMemoizationCap: 1,
+    })
     const { Div, H1, P, Span, Article } = rootElement
 
     it('tree structure 1', () => {
       const el = Div([
         H1({ css: 'h2' }, 'header'), // should swap with h2
+        H1({ css: 'h2' }, 'header'), // should trigger memoized
+        H1({ css: 'h3' }, 'header'), // should add cache
+        H1({ css: 'h5' }, 'header'), // should clear cache
         P({ style: { color: 'grey' } }, 'description'),
         Span({ id: 'hey', excluded: null }),
         Div({ id: 'nested' }, [
@@ -100,7 +106,7 @@ describe('Arche', () => {
 
       assert.strictEqual(
         JSON.stringify(el),
-        '["div",{},[["h2",{},["header"]],["p",{"style":{"color":"grey"}},["description"]],["span",{"id":"hey","excluded":null},[]],["div",{"id":"nested"},[["article",{},["yo"]]]]]]')
+        '["div",{},[["h2",{},["header"]],["h2",{},["header"]],["h3",{},["header"]],["h5",{},["header"]],["p",{"style":{"color":"grey"}},["description"]],["span",{"id":"hey","excluded":null},[]],["div",{"id":"nested"},[["article",{},["yo"]]]]]]')
     })
 
     it('tree structure 2', () => {

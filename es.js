@@ -33,40 +33,6 @@ const elementSetAttribute = function (element, key, value) {
 }
 
 /**
- * @name memoizeCappedWithResolver
- *
- * @synopsis
- * ```coffeescript [specscript]
- * memoizeCappedWithResolver(
- *   func function,
- *   cap number,
- *   resolver function,
- * ) -> memoized function
- * ```
- *
- * @description
- * Memoize a function with a resolver. Clear cache when size reaches cap.
- */
-
-const memoizeCappedWithResolver = function (func, cap, resolver) {
-  const cache = new Map(),
-    memoized = function memoized(...args) {
-      if (cache.size > cap) {
-        cache.clear()
-      }
-      const key = resolver(...args)
-      if (cache.has(key)) {
-        return cache.get(key)
-      }
-      const result = func(...args)
-      cache.set(key, result)
-      return result
-    }
-  memoized.cache = cache
-  return memoized
-}
-
-/**
  * @name creatorCreateElement
  *
  * @synopsis
@@ -221,9 +187,7 @@ const creatorCreateElement = function (creator, type, props, children) {
  */
 
 const Arche = function (creator, options = {}) {
-  const get0 = array => array[0]
-  const styled = options.styled
-    ?? memoizeCappedWithResolver(options.styled, 1000, array => array[0])
+  const { styled } = options
 
   const originalRootElement = type => function creatingElement(arg0, arg1) {
     if (isArray(arg0)) {
