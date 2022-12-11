@@ -1,7 +1,7 @@
 /**
- * Arche v0.3.1
+ * Arche v0.3.2
  * https://github.com/richytong/arche
- * (c) 2020-2021 Richard Tong
+ * (c) 2020-2023 Richard Tong
  * Arche may be freely distributed under the MIT license.
  */
 
@@ -156,7 +156,7 @@ const creatorCreateElement = function (creator, type, props, children) {
  *
  * Arche(creator, options {
  *   styled?: Styled,
- *   styledMemoizationCap: number,
+ *   styledMemoizationCap?: number,
  * }) -> rootElement
  * ```
  *
