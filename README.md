@@ -96,6 +96,14 @@ import Arche from 'https://unpkg.com/arche/es.js'
 ```coffeescript [specscript]
 Arche(React {
   createElement: (type, props?, children?)=>ReactElement,
+}, options? {
+  styled?: {
+    div: function,
+    p: funcion,
+    span: function,
+    // etc
+  },
+  styledMemoizationCap?: number, // defaults to 1000
 }) -> ReactElement
 ```
 
