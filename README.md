@@ -100,23 +100,45 @@ Arche(React {
 ```
 
 # Usage
+Set Arche elements globally for a great developer experience.
 ```javascript
+// global.js
+
 const ReactElement = Arche(React)
 
-const {
-  A, P, B, Q, I, Ul, Ol, Li,
-  H1, H2, H3, H4, H5, H6, Hr, Br,
-  Script, Html, Body, Nav, Section, Article, Footer, Span, Div, Img, Video,
-  Form, Fieldset, Input, Label, Textarea, Select, Option,
-  Button, Iframe, Blockquote, Code, Pre,
-} = ReactElement
+window.ReactElement = ReactElement
+
+for (const elementName in ReactElement) {
+  window[elementName] = ReactElement[elementName]
+}
+
+// Arche for now does not export every element
+// create the ones you need like so
+window.Aside = ReactElement('aside')
+window.Svg = ReactElement('svg')
+window.Path = ReactElement('path')
 ```
 
-Don't see an element you need? Just create it!
-```javascript [playground]
-const ReactElement = Arche(React)
+## Using styled
+Arche accepts a `styled` option from css-in-js libraries like [Styled Components](https://styled-components.com/) to enable a `css` prop on the base elements. This does not apply to composite components (those created with `ReactElement(props => {...})` syntax)
 
-const Aside = ReactElement('aside')
+```javascript
+// global.js
+const ReactElement = Arche(React, { styled })
+```
+
+Elements can now specify a `css` prop to use css-in-js.
+
+```javascript
+// MyComponent.js
+const MyComponent = ReactElement(props => {
+  return Div({
+    css: `
+      width: 500px;
+      background-color: pink;
+    `,
+  })
+})
 ```
 
 ## Using React Context
