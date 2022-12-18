@@ -1,5 +1,5 @@
 /**
- * Arche v0.3.2
+ * Arche v0.3.5
  * https://github.com/richytong/arche
  * (c) 2020-2023 Richard Tong
  * Arche may be freely distributed under the MIT license.
@@ -264,7 +264,7 @@ const Arche = function (creator, options = {}) {
       }
 
       if (isArray(arg1)) {
-        if (arg0.css == null) {
+        if (arg0 == null || arg0.css == null) {
           return creatorCreateElement(creator, type, arg0, arg1)
         }
         const { css, ...props } = arg0
@@ -272,14 +272,14 @@ const Arche = function (creator, options = {}) {
       }
 
       if (arg1 == null) {
-        if (arg0.css == null) {
+        if (arg0 == null || arg0.css == null) {
           return creatorCreateElement(creator, type, arg0, [])
         }
         const { css, ...props } = arg0
         return creatorCreateElement(creator, styledComponent([css]), props, [])
       }
 
-      if (arg0.css == null) {
+      if (arg0 == null || arg0.css == null) {
         return creatorCreateElement(creator, type, arg0, [arg1])
       }
       const { css, ...props } = arg0
