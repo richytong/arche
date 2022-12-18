@@ -117,11 +117,12 @@ describe('Arche', () => {
         Div({ css: 'article', id: 'nested' }, [
           Article('yo'),
         ]),
+        Span(),
       ])
 
       assert.strictEqual(
         JSON.stringify(el),
-        '["div",{},[["h1",{},["header"]],["h3",{"style":{"color":"grey"}},["description"]],["b",{"id":"hey","excluded":null},[]],["article",{"id":"nested"},[["article",{},["yo"]]]]]]')
+        '["div",{},[["h1",{},["header"]],["h3",{"style":{"color":"grey"}},["description"]],["b",{"id":"hey","excluded":null},[]],["article",{"id":"nested"},[["article",{},["yo"]]]],["span",{},[]]]]')
     })
   })
 })
