@@ -5,7 +5,7 @@
 ![Node.js CI](https://github.com/richytong/arche/workflows/Node.js%20CI/badge.svg?branch=master)
 [![codecov](https://codecov.io/gh/richytong/arche/branch/master/graph/badge.svg)](https://codecov.io/gh/richytong/arche)
 
-HTML as JavaScript.
+HTML as JavaScript. 
 
 ```javascript [playground]
 const ReactElement = Arche(React)
