@@ -2,7 +2,7 @@
 ![arche-logo](https://raw.githubusercontent.com/a-synchronous/assets/master/arche-logo-226x226.png)
 > Arche (/ˈɑːrki/; Ancient Greek: ἀρχή) is a Greek word with primary senses "beginning", "origin" or "source of action" (ἐξ' ἀρχῆς: from the beginning, οr ἐξ' ἀρχῆς λόγος: the original argument), and later "first principle" or "element". ([wikipedia](https://en.wikipedia.org/wiki/Arche))
 
-![Node.js CI](https://github.com/richytong/arche/actions/workflows/nodejs.yml/badge.svg?branch=master)
+![Node.js CI](https://github.com/richytong/arche/actions/workflows/nodejs.yml/badge.svg)
 [![codecov](https://codecov.io/gh/richytong/arche/branch/master/graph/badge.svg)](https://codecov.io/gh/richytong/arche)
 
 HTML as JavaScript. 
@@ -24,7 +24,7 @@ const myElement = Div([
 render(myElement)
 // <div>
 //   <h1>I am a heading</h1>
-//   <p>heyo</p>
+//   <p>paragraph</p>
 //   <p>lorem ipsum</p>
 // </div>
 ```
