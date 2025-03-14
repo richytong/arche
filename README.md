@@ -17,7 +17,7 @@ const { Div, H1, P } = ReactElement
 
 const myElement = Div([
   H1('I am a heading'),
-  P('heyo'),
+  P('paragraph'),
   P('lorem ipsum'),
 ])
 
