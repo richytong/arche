@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+  <script src="https://unpkg.com/react@16.13.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="/index.js"></script>
+</head>
+<body>
+  <div id="example"></div>
+  <div id="user-card"></div>
+  <div id="dom-example">
+  </div>
+</body>
+<script>
+function isElement(obj) {
+  try {
+    return obj instanceof HTMLElement;
+  } catch (error) {
+    return (typeof obj == 'object') &&
+      (obj.nodeType == 1) && (typeof obj.style == 'object') &&
+      (typeof obj.ownerDocument == 'object')
+  }
+}
+
+const Lib = {
+  createElement(type, props, ...children) {
+    const el = document.createElement(type)
+
+    for (const key in props) {
+      if (key == 'class') {
+        el.className = props[key]
+      } else {
+        el[key] = props[key]
+      }
+    }
+
+    if (typeof children == 'string') {
+      el.appendChild(document.createTextNode(children))
+    } else if (Array.isArray(children)) {
+      for (const child of children) {
+        if (typeof child == 'string') {
+          el.appendChild(document.createTextNode(child))
+        } else if (isElement(child)) {
+          el.appendChild(child)
+        } else {
+          console.error(child)
+          const error = new Error(`invalid child ${children}`)
+          error.child = child
+          throw error
+        }
+      }
+    } else if (isElement(children)) {
+      el.appendChild(children)
+    } else {
+      console.error(children)
+      const error = new Error(`invalid children ${children}`)
+      error.children = children
+      throw error
+    }
+
+    return el
+  },
+}
+
+const LibElement = Arche(Lib)
+
+const Div = LibElement('div')
+const H1 = LibElement('h1')
+const P = LibElement('p')
+const Span = LibElement('span')
+
+const component1 = Div({
+  id: 'component-1',
+  class: 'a',
+}, [
+  H1('Component 1'),
+  P('test'),
+])
+
+console.log('component1', component1)
+
+document.getElementById('dom-example').appendChild(component1)
+
+</script>
+</html>
