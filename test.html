@@ -5,22 +5,21 @@
   <title>test</title>
   <script src="https://unpkg.com/react@16.13.1/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/styled-components@6.1.19/dist/styled-components.min.js"></script>
   <script src="/index.js"></script>
 </head>
 <body>
-  <div id="example"></div>
-  <div id="user-card"></div>
-  <div id="dom-example"></div>
-</body>
-<script>
+  <div id="react-counter"></div>
+
+  <script>
 const ReactElement = Arche(React)
 const { Div, H1, P, Button, Img } = ReactElement
 const { useState } = React
 
-const Example = ReactElement(() => {
+const ReactCounter = ReactElement(() => {
   const [count, setCount] = useState(0)
   return Div([
-    P('Success! - React'),
+    P('Success! - React Counter'),
     P(`You clicked ${count} times`),
     Button({
       onClick() {
@@ -30,11 +29,16 @@ const Example = ReactElement(() => {
   ])
 })
 
-ReactDOM.render(Example(), document.getElementById('example'))
+ReactDOM.render(ReactCounter(), document.getElementById('react-counter'))
+  </script>
 
+  <div id="user-card"></div>
+
+  <script>
 const UserCard = ReactElement(({
   firstName, lastName, age,
 }) => Div({ style: { border: '1px solid lightgrey' } }, [
+  P('Success! - React User Card'),
   H1(`${firstName} ${lastName}`),
   Img({ src: 'https://placehold.co/300', alt: 'placeholder' }),
   P({ style: { color: 'lightgrey' } }, `age: ${age}`),
@@ -42,8 +46,13 @@ const UserCard = ReactElement(({
 
 ReactDOM.render(
   UserCard({ firstName: 'George', lastName: 'Henry', age: 32 }),
-  document.getElementById('user-card'))
+  document.getElementById('user-card')
+)
+  </script>
 
+  <div id="dom-example"></div>
+
+  <script>
 const DOMElement = Arche(document)
 
 const domExample = DOMElement.Div([
@@ -56,6 +65,39 @@ const domExample = DOMElement.Div([
 ])
 
 document.getElementById('dom-example').appendChild(domExample)
+  </script>
 
+  <div id="styled-react-user-card"></div>
+
+  <script>
+const StyledReactElement = Arche(React, { styled })
+
+const StyledUserCard = StyledReactElement(({
+  firstName, lastName, age,
+}) => StyledReactElement.Div({
+  css: `
+border: 1px solid lightgrey;
+  `,
+}, [
+  StyledReactElement.P('Success! - Styled React User Card'),
+  StyledReactElement.H1(`${firstName} ${lastName}`),
+  StyledReactElement.Img({ src: 'https://placehold.co/300', alt: 'placeholder' }),
+  StyledReactElement.P({
+    css: `
+color: lightgrey;
+    `,
+  }, `age: ${age}`),
+]))
+
+ReactDOM.render(
+  StyledUserCard({ firstName: 'George', lastName: 'Henry II', age: 32 }),
+  document.getElementById('styled-react-user-card')
+)
+
+console.log(styled)
+  </script>
+
+</body>
+<script>
 </script>
 </html>
