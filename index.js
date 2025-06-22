@@ -31,6 +31,13 @@ const elementSetAttribute = function (element, key, value) {
   if (value == null) { // boolean
     element.setAttribute(key, value)
   }
+  else if (typeof value == 'boolean') {
+    if (value) {
+      element.setAttribute(key, key)
+    } else {
+      element.removeAttribute(key)
+    }
+  }
   else if (value.constructor == Object) { // style
     for (const subKey in value) {
       element[key][subKey] = value[subKey]

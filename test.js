@@ -46,6 +46,7 @@ describe('Arche', () => {
           Article('yo'),
         ]),
         Button({
+          disabled: true,
           onClick: listener,
           onMouseOver(event) {
             console.log('onmouseover')
@@ -62,7 +63,7 @@ describe('Arche', () => {
 
       assert.strictEqual(
         JSON.stringify(el),
-        '{"type":"div","children":[{"type":"h1","children":[{"type":"text","text":"header"}],"style":{}},{"type":"p","children":[{"type":"text","text":"description"}],"style":{"color":"grey"}},{"type":"span","children":[],"style":{},"id":"hey","excluded":null},{"type":"div","children":[{"type":"article","children":[{"type":"text","text":"yo"}],"style":{}}],"style":{},"id":"nested"},{"type":"button","children":[],"style":{}}],"style":{}}')
+        '{"type":"div","children":[{"type":"h1","children":[{"type":"text","text":"header"}],"style":{}},{"type":"p","children":[{"type":"text","text":"description"}],"style":{"color":"grey"}},{"type":"span","children":[],"style":{},"id":"hey","excluded":null},{"type":"div","children":[{"type":"article","children":[{"type":"text","text":"yo"}],"style":{}}],"style":{},"id":"nested"},{"type":"button","children":[],"style":{},"disabled":"disabled"}],"style":{}}')
     })
   })
 
