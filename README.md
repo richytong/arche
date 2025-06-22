@@ -246,7 +246,7 @@ ReactElement.Pre -> TypedReactElement
 ```
 
 ## Using styled
-Arche accepts a `styled` option from css-in-js libraries like [Styled Components](https://styled-components.com/) to enable a `css` prop on the base elements. This does not apply to composite components (those created with `ReactElement(props => {...})` syntax)
+Arche accepts a `styled` option from css-in-js libraries like [Styled Components](https://styled-components.com/) to enable a `css` prop on `ReactElement` and `TypedReactElement`. This does not apply to composite components (those created with `ReactElement(props => {...})` syntax)
 
 ```javascript
 // global.js
@@ -298,13 +298,31 @@ type Styled = {
 Arche(React {
   createElement: (
     elementType string,
-    propsWithCss? { css: string, ...object },
+    props object,
     children? string|Array<React.Element|string>,
   )=>ReactElement
 }, options {
   styled: Styled,
   styledMemoizationCap?: number
 }) -> ReactElement
+
+ReactElement(
+  elementType string,
+  propsWithCss? { css: string, ...object },
+  text string
+) -> React.Element
+
+ReactElement(elementType string) -> TypedReactElement
+
+TypedReactElement(
+  propsWithCss? { css: string, ...object },
+  text string
+) -> React.Element
+
+TypedReactElement(
+  propsWithCss? { css: string, ...object },
+  children? string|Array<React.Element|string>
+) -> React.Element
 ```
 
 ## Using React Context
