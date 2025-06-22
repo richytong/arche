@@ -13,15 +13,14 @@
 
   <script>
 const ReactElement = Arche(React)
-const { Div, H1, P, Button, Img } = ReactElement
 const { useState } = React
 
 const ReactCounter = ReactElement(() => {
   const [count, setCount] = useState(0)
-  return Div([
-    P('Success! - React Counter'),
-    P(`You clicked ${count} times`),
-    Button({
+  return ReactElement.Div([
+    ReactElement.P('Success! - React Counter'),
+    ReactElement.P(`You clicked ${count} times`),
+    ReactElement.Button({
       onClick() {
         setCount(count + 1)
       },
@@ -37,11 +36,11 @@ ReactDOM.render(ReactCounter(), document.getElementById('react-counter'))
   <script>
 const UserCard = ReactElement(({
   firstName, lastName, age,
-}) => Div({ style: { border: '1px solid lightgrey' } }, [
-  P('Success! - React User Card'),
-  H1(`${firstName} ${lastName}`),
-  Img({ src: 'https://placehold.co/300', alt: 'placeholder' }),
-  P({ style: { color: 'lightgrey' } }, `age: ${age}`),
+}) => ReactElement.Div({ style: { border: '1px solid lightgrey' } }, [
+  ReactElement.P('Success! - React User Card'),
+  ReactElement.H1(`${firstName} ${lastName}`),
+  ReactElement.Img({ src: 'https://placehold.co/300', alt: 'placeholder' }),
+  ReactElement.P({ style: { color: 'lightgrey' } }, `age: ${age}`),
 ]))
 
 ReactDOM.render(
@@ -95,6 +94,21 @@ ReactDOM.render(
 )
 
 console.log(styled)
+  </script>
+
+  <div id="my-container"></div>
+
+  <script>
+const DocumentElement = Arche()
+
+const myElement = DocumentElement.Div({ id: 'my-element' }, [
+  DocumentElement.P('Success! - Docs container example'),
+  DocumentElement.H1('I am a heading'),
+  DocumentElement.P('paragraph'),
+  DocumentElement.P('lorem ipsum'),
+])
+
+document.getElementById('my-container').appendChild(myElement)
   </script>
 
 </body>

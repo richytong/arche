@@ -7,31 +7,32 @@
 
 HTML as JavaScript. 
 
-```javascript [playground]
-const ReactElement = Arche(React)
-// supply the React library
+```javascript
+const DocumentElement = Arche()
+const { Div, H1, P } = DocumentElement
+// Typed DocumenElements are available as properties
 
-const { Div, H1, P } = ReactElement
-// some common building blocks are provided on ReactElement
-// as property functions.
-
-const myElement = Div([
+const myElement = Div({ id: 'my-element' }, [
   H1('I am a heading'),
   P('paragraph'),
   P('lorem ipsum'),
 ])
 
-render(myElement)
-// <div>
-//   <h1>I am a heading</h1>
-//   <p>paragraph</p>
-//   <p>lorem ipsum</p>
+document.getElementById('#my-container').appendChild(myElement)
+// <div id="my-container">
+//   <div id="my-element">
+//     <h1>I am a heading</h1>
+//     <p>paragraph</p>
+//     <p>lorem ipsum</p>
+//   </div>
 // </div>
 ```
 
 Create dynamic components with props:
-```javascript [playground]
+```javascript
 const ReactElement = Arche(React)
+// provide the React library
+
 const { Div, H1, P, Button, Img } = ReactElement
 
 const UserCard = ReactElement(({
@@ -51,7 +52,7 @@ render(UserCard({ firstName: 'George', lastName: 'Henry', age: 32 }))
 ```
 
 Complete interoperability with React hooks (converted from [this example](https://reactjs.org/docs/hooks-intro.html)):
-```javascript [playground]
+```javascript
 const ReactElement = Arche(React)
 const { Div, P, Button } = ReactElement
 const { useState } = React
@@ -118,8 +119,63 @@ window.Path = ReactElement('path')
 Arche() -> DocumentElement
 Arche(document Document) -> DocumentElement
 
-DocumentElement(elementType string) -> Element
-DocumentElement(elementType string, props object, text string) -> Element
+DocumentElement(
+  elementType string,
+  props object,
+  text string
+) -> Element
+
+DocumentElement(
+  elementType string,
+  props object,
+  children Array<Element|string>
+) -> Element
+
+DocumentElement(elementType string) -> TypedDocumentElement
+
+TypedDocumentElement(props object, text string) -> React.Element
+TypedDocumentElement(text string)-> React.Element
+TypedDocumentElement(children Array<Element|string>)-> React.Element
+
+TypedDocumentElement.A -> TypedDocumentElement
+TypedDocumentElement.P -> TypedDocumentElement
+TypedDocumentElement.B -> TypedDocumentElement
+TypedDocumentElement.Q -> TypedDocumentElement
+TypedDocumentElement.I -> TypedDocumentElement
+TypedDocumentElement.Ul -> TypedDocumentElement
+TypedDocumentElement.Ol -> TypedDocumentElement
+TypedDocumentElement.Li -> TypedDocumentElement
+TypedDocumentElement.H1 -> TypedDocumentElement
+TypedDocumentElement.H2 -> TypedDocumentElement
+TypedDocumentElement.H3 -> TypedDocumentElement
+TypedDocumentElement.H4 -> TypedDocumentElement
+TypedDocumentElement.H5 -> TypedDocumentElement
+TypedDocumentElement.H6 -> TypedDocumentElement
+TypedDocumentElement.Hr -> TypedDocumentElement
+TypedDocumentElement.Br -> TypedDocumentElement
+TypedDocumentElement.Script -> TypedDocumentElement
+TypedDocumentElement.Html -> TypedDocumentElement
+TypedDocumentElement.Body -> TypedDocumentElement
+TypedDocumentElement.Nav -> TypedDocumentElement
+TypedDocumentElement.Section -> TypedDocumentElement
+TypedDocumentElement.Article -> TypedDocumentElement
+TypedDocumentElement.Footer -> TypedDocumentElement
+TypedDocumentElement.Span -> TypedDocumentElement
+TypedDocumentElement.Div -> TypedDocumentElement
+TypedDocumentElement.Img -> TypedDocumentElement
+TypedDocumentElement.Video -> TypedDocumentElement
+TypedDocumentElement.Form -> TypedDocumentElement
+TypedDocumentElement.Fieldset -> TypedDocumentElement
+TypedDocumentElement.Input -> TypedDocumentElement
+TypedDocumentElement.Label -> TypedDocumentElement
+TypedDocumentElement.Textarea -> TypedDocumentElement
+TypedDocumentElement.Select -> TypedDocumentElement
+TypedDocumentElement.Option -> TypedDocumentElement
+TypedDocumentElement.Button -> TypedDocumentElement
+TypedDocumentElement.Iframe -> TypedDocumentElement
+TypedDocumentElement.Blockquote -> TypedDocumentElement
+TypedDocumentElement.Code -> TypedDocumentElement
+TypedDocumentElement.Pre -> TypedDocumentElement
 
 Arche(React {
   createElement: (
@@ -129,7 +185,11 @@ Arche(React {
   )=>ReactElement
 }) -> ReactElement
 
-ReactElement(elementType string, props object, text string) -> React.Element
+ReactElement(
+  elementType string,
+  props object,
+  text string
+) -> React.Element
 
 ReactElement(
   elementType string,
@@ -137,7 +197,7 @@ ReactElement(
   children Array<React.Element|string>
 ) -> React.Element
 
-ReactElement(elementType string) -> TypedReactElement function
+ReactElement(elementType string) -> TypedReactElement
 
 TypedReactElement(props object, text string) -> React.Element
 TypedReactElement(text string)-> React.Element
@@ -237,7 +297,7 @@ type Styled = {
 Arche(React {
   createElement: (
     elementType string,
-    props? object,
+    propsWithCss? { css: string, ...object },
     children? string|Array<React.Element|string>,
   )=>ReactElement
 }, options {
