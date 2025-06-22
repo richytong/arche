@@ -223,7 +223,7 @@ function CreatorElement(
  *   )=>creator.Element
  * }
  *
- * __CreatorElement(creator elementType string) -> _Element function
+ * __CreatorElement(creator elementType string) -> _Element
  *
  * _Element(
  *   propsOrTextOrChildren object|string|Array,
@@ -288,9 +288,9 @@ function _CreatorElement(creator) {
  *     styled Styled,
  *     styledMemoizationCap number,
  *   }
- * ) -> _StyledCreatorElement function
+ * ) -> _StyledCreatorElement
  *
- * _StyledCreatorElement(elementType string) -> _StyledElement function
+ * _StyledCreatorElement(elementType string) -> _StyledElement
  *
  * _StyledElement(
  *   propsOrTextOrChildren object|string|Array,
