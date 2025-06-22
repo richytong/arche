@@ -31,8 +31,8 @@ document.getElementById('#my-container').appendChild(myElement)
 
 Create dynamic components with props:
 ```javascript
-const ReactElement = Arche(React)
 // provide the React library
+const ReactElement = Arche(React)
 
 const { Div, H1, P, Button, Img } = ReactElement
 
