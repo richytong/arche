@@ -9,8 +9,9 @@ HTML as JavaScript.
 
 ```javascript
 const DocumentElement = Arche()
+
+// Typed DocumenElements are available as properties of DocumentElement
 const { Div, H1, P } = DocumentElement
-// Typed DocumenElements are available as properties
 
 const myElement = Div({ id: 'my-element' }, [
   H1('I am a heading'),
