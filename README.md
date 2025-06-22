@@ -183,8 +183,8 @@ Arche(React {
     elementType string,
     props? object,
     children? string|Array<React.Element|string>
-  )=>ReactElement
-}) -> reactElement ReactElement
+  )=>(reactElement React.Element)
+}) -> ReactElement
 
 ReactElement(
   elementType string,
@@ -300,7 +300,7 @@ Arche(React {
     elementType string,
     props object,
     children? string|Array<React.Element|string>
-  )=>ReactElement
+  )=>(reactElement React.Element)
 }, options {
   styled: Styled,
   styledMemoizationCap?: number
