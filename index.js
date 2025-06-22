@@ -28,11 +28,19 @@ const isArray = Array.isArray
  * ```
  */
 const elementSetAttribute = function (element, key, value) {
-  if (value != null && value.constructor == Object) { // style
+  if (value == null) { // boolean
+    element.setAttribute(key, value)
+  }
+  else if (value.constructor == Object) { // style
     for (const subKey in value) {
       element[key][subKey] = value[subKey]
     }
-  } else {
+  }
+  else if (typeof value == 'function') { // onClick
+    const eventType = key.toLowerCase().replace(/^on/, '')
+    element.addEventListener(eventType, value)
+  }
+  else {
     element.setAttribute(key, value)
   }
   return element
