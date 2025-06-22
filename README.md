@@ -124,19 +124,19 @@ DocumentElement(
   elementType string,
   props object,
   text string
-) -> Element
+) -> element Element
 
 DocumentElement(
   elementType string,
   props object,
   children Array<Element|string>
-) -> Element
+) -> element Element
 
 DocumentElement(elementType string) -> TypedDocumentElement
 
-TypedDocumentElement(props object, text string) -> Element
-TypedDocumentElement(text string)-> Element
-TypedDocumentElement(children Array<Element|string>)-> Element
+TypedDocumentElement(props object, text string) -> element Element
+TypedDocumentElement(text string) -> element Element
+TypedDocumentElement(children Array<Element|string>) -> element Element
 
 TypedDocumentElement.A -> TypedDocumentElement
 TypedDocumentElement.P -> TypedDocumentElement
@@ -184,25 +184,25 @@ Arche(React {
     props? object,
     children? string|Array<React.Element|string>
   )=>ReactElement
-}) -> ReactElement
+}) -> reactElement ReactElement
 
 ReactElement(
   elementType string,
   props object,
   text string
-) -> React.Element
+) -> reactElement React.Element
 
 ReactElement(
   elementType string,
   props object,
   children Array<React.Element|string>
-) -> React.Element
+) -> reactElement React.Element
 
 ReactElement(elementType string) -> TypedReactElement
 
-TypedReactElement(props object, text string) -> React.Element
-TypedReactElement(text string)-> React.Element
-TypedReactElement(children Array<React.Element|string>)-> React.Element
+TypedReactElement(props object, text string) -> reactElement React.Element
+TypedReactElement(text string) -> reactElement React.Element
+TypedReactElement(children Array<React.Element|string>) -> reactElement React.Element
 
 ReactElement.A -> TypedReactElement
 ReactElement.P -> TypedReactElement
@@ -299,30 +299,30 @@ Arche(React {
   createElement: (
     elementType string,
     props object,
-    children? string|Array<React.Element|string>,
+    children? string|Array<React.Element|string>
   )=>ReactElement
 }, options {
   styled: Styled,
   styledMemoizationCap?: number
-}) -> ReactElement
+}) -> reactElement ReactElement
 
 ReactElement(
   elementType string,
-  propsWithCss? { css: string, ...object },
+  propsWithCss? { css: string, ...props object },
   text string
-) -> React.Element
+) -> reactElement React.Element
 
 ReactElement(elementType string) -> TypedReactElement
 
 TypedReactElement(
-  propsWithCss? { css: string, ...object },
+  propsWithCss? { css: string, ...props object },
   text string
-) -> React.Element
+) -> reactElement React.Element
 
 TypedReactElement(
-  propsWithCss? { css: string, ...object },
+  propsWithCss? { css: string, ...props object },
   children? string|Array<React.Element|string>
-) -> React.Element
+) -> reactElement React.Element
 ```
 
 ## Using React Context
