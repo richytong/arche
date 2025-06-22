@@ -94,6 +94,8 @@ import Arche from 'https://unpkg.com/arche/es.js'
 
 # Syntax
 ```coffeescript [specscript]
+Arche() -> DocumentElement
+Arche(document Document) -> DocumentElement
 Arche(React {
   createElement: (type, props?, children?)=>ReactElement,
 }, options? {

@@ -3,6 +3,21 @@ const Arche = require('.')
 
 describe('Arche', () => {
   describe('unary creator.createElement - document', () => {
+    it('init', async () => {
+      assert.throws(
+        () => {
+          const E1 = Arche()
+          console.log(E1)
+        },
+        new TypeError('creator not defined'),
+      )
+
+      globalThis.document = { createElement() {} }
+
+      const E1 = Arche()
+      assert.equal(E1.creator, globalThis.document)
+    })
+
     const mockEventListeners = new Map()
     const mockDocument = {
       createElement(type) {
