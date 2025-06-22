@@ -97,7 +97,7 @@ const memoizeCappedWithResolver = function (func, cap, resolver) {
  *     elementType string,
  *     props? object,
  *     children? Array<creator.Element>
- *   )=>creator.Element
+ *   )=>(creatorElement creator.Element)
  * }
  *
  * creatorCreateElement(
@@ -105,7 +105,7 @@ const memoizeCappedWithResolver = function (func, cap, resolver) {
  *   elementType string|function,
  *   propsOrTextOrChildren object|string|Array,
  *   textOrChildren string|Array,
- * ) -> creator.Element
+ * ) -> creatorElement creator.Element
  * ```
  */
 function creatorCreateElement(
@@ -150,13 +150,12 @@ function creatorCreateElement(
  *       elementType string,
  *       props? object,
  *       children? Array<creator.Element>
- *     )=>creator.Element
+ *     )=>(creatorElement creator.Element)
  *   },
  *   elementType string,
  *   propsOrTextOrChildren object|string|Array,
  *   textOrChildren string|Array,
- * )
- *   -> creator.Element
+ * ) -> creatorElement creator.Element
  * ```
  */
 function CreatorElement(
@@ -220,7 +219,7 @@ function CreatorElement(
  *     elementType string,
  *     props? object,
  *     children? Array<creator.Element>
- *   )=>creator.Element
+ *   )=>(creatorElement creator.Element)
  * }
  *
  * __CreatorElement(creator elementType string) -> _Element
@@ -228,7 +227,7 @@ function CreatorElement(
  * _Element(
  *   propsOrTextOrChildren object|string|Array,
  *   textOrChildren string|Array,
- * ) -> creator.Element
+ * ) -> creatorElement creator.Element
  * ```
  */
 function __CreatorElement(creator, elementType) {
@@ -254,10 +253,11 @@ function __CreatorElement(creator, elementType) {
  *     elementType string,
  *     props? object,
  *     children? Array<creator.Element>
- *   )=>creator.Element
+ *   )=>(creatorElement creator.Element)
  * }
  *
- * _CreatorElement(creator) -> _Element (...args)=>creator.Element
+ * _CreatorElement(creator) -> _Element
+ * _Element(...args) -> creatorElement creator.Element
  * ```
  */
 function _CreatorElement(creator) {
@@ -279,7 +279,7 @@ function _CreatorElement(creator) {
  *     elementType string,
  *     props? object,
  *     children? Array<creator.Element>
- *   )=>creator.Element
+ *   )=>(creatorElement creator.Element)
  * }
  *
  * $__StyledCreatorElement(
@@ -295,7 +295,7 @@ function _CreatorElement(creator) {
  * _StyledElement(
  *   propsOrTextOrChildren object|string|Array,
  *   textOrChildren string|Array,
- * ) -> creator.Element
+ * ) -> creatorElement creator.Element
  * ```
  */
 function $__StyledCreatorElement(creator, options) {
@@ -387,7 +387,7 @@ function $__StyledCreatorElement(creator, options) {
  *     elementType string,
  *     props? object,
  *     children? Array<creator.Element>
- *   )=>creator.Element
+ *   )=>(creatorElement creator.Element)
  * }
  *
  * __assignElementNames(CreatorElement creator.Element) -> ()
@@ -442,121 +442,8 @@ function __assignElementNames(CreatorElement) {
 /**
  * @name Arche
  *
- * @synopsis
- * ```coffeescript [specscript]
- * Element = Object
- *
- * type string|function
- * props Object
- * children string|Object|Array<string|Object>
- * element Element
- * creator {
- *   createElement: (type, props?, children?)=>element,
- * }
- * rootElement type=>((props, children?)|children)=>element {
- *   Script: ((props, children?)|children)=>element,
- *   Html: ((props, children?)|children)=>element,
- *   Body: (props, children?)|children)=>element,
- *   Section: (props, children?)|children)=>element,
- *   Article: (props, children?)|children)=>element,
- *   Span: (props, children?)|children)=>element,
- *   Div: (props, children?)|children)=>element,
- *   Img: (props, children?)|children)=>element,
- *   H1: (props, children?)|children)=>element,
- *   H2: (props, children?)|children)=>element,
- *   H3: (props, children?)|children)=>element,
- *   H4: (props, children?)|children)=>element,
- *   H5: (props, children?)|children)=>element,
- *   H6: (props, children?)|children)=>element,
- *
- *   A: (props, children?)|children)=>element,
- *   P: (props, children?)|children)=>element,
- *   B: (props, children?)|children)=>element,
- *   Q: (props, children?)|children)=>element,
- *   I: (props, children?)|children)=>element,
- *   Ul: (props, children?)|children)=>element,
- *   Ol: (props, children?)|children)=>element,
- *   Li: (props, children?)|children)=>element,
- *   Textarea: (props, children?)|children)=>element,
- *   Button: (props, children?)|children)=>element,
- *   Iframe: (props, children?)|children)=>element,
- *   Blockquote: (props, children?)|children)=>element,
- *   Br: (props, children?)|children)=>element,
- *   Code: (props, children?)|children)=>element,
- *   Pre: (props, children?)|children)=>element,
- * }
- *
- * Arche(creator, options {
- *   styled?: Styled,
- *   styledMemoizationCap?: number,
- * }) -> rootElement
- * ```
- *
  * @description
- * > Arche (/ˈɑːrki/; Ancient Greek: ἀρχή) is a Greek word with primary senses "beginning", "origin" or "source of action" (ἐξ' ἀρχῆς: from the beginning, οr ἐξ' ἀρχῆς λόγος: the original argument), and later "first principle" or "element". ([wikipedia](https://en.wikipedia.org/wiki/Arche))
- *
- * HTML as JavaScript.
- *
- * ```javascript [playground]
- * const ReactElement = Arche(React)
- * // supply the React library
- *
- * const { Div, H1, P } = ReactElement
- * // some common building blocks are provided on ReactElement
- * // as property functions.
- *
- * const myElement = Div([
- *   H1('I am a heading'),
- *   P('heyo'),
- *   P('lorem ipsum'),
- * ])
- *
- * console.log(myElement)
- * // {
- * //   $$typeof: Symbol(react.element),
- * //   type: 'div',
- * //   props: {
- * //     children: [
- * //       { $$typeof: Symbol(react.element), type: 'h1', props: { children: 'I am a heading' } },
- * //       { $$typeof: Symbol(react.element), type: 'p', props: { children: 'heyo' } },
- * //       { $$typeof: Symbol(react.element), type: 'p', props: { children: 'heyo' } },
- * //     ],
- * //   },
- * // }
- * ```
- *
- * Create dynamic components with props:
- * ```javascript [playground]
- * const ReactElement = Arche(React)
- * const { Div, P, Button } = ReactElement
- *
- * const UserCard = ReactElement(({
- *   firstName, lastName, age,
- * }) => Div([
- *   H1(`${firstName} ${lastName}`),
- *   P({ style: { color: 'lightgrey' } }, [age]),
- * ]))
- * ```
- *
- * Complete interop with React hooks (converted from [this example](https://reactjs.org/docs/hooks-intro.html)):
- * ```javascript [playground]
- * const ReactElement = Arche(React)
- * const { Div, P, Button } = ReactElement
- * const { useState } = React
- *
- * const Example = ReactElement(() => {
- *   const [count, setCount] = useState(0)
- *
- *   return Div([
- *     P(`You clicked ${count} times`),
- *     Button({
- *       onClick() {
- *         setCount(count + 1)
- *       },
- *     }, 'Click me'),
- *   ])
- * })
- * ```
+ * See [README](/README.md).
  */
 
 const Arche = function (creator, options = {}) {
