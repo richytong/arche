@@ -378,6 +378,68 @@ function __StyledCreatorElement(creator, options) {
 }
 
 /**
+ * @name __assignElementNames
+ *
+ * @synopsis
+ * ```coffeescript [specscript]
+ * creator {
+ *   createElement: (
+ *     elementType string,
+ *     props? object,
+ *     children? Array<creator.Element>
+ *   )=>creator.Element
+ * }
+ *
+ * __assignElementNames(CreatorElement creator.Element) -> ()
+ * ```
+ */
+function __assignElementNames(CreatorElement) {
+  CreatorElement.A = CreatorElement('a')
+  CreatorElement.P = CreatorElement('p')
+  CreatorElement.B = CreatorElement('b')
+  CreatorElement.Q = CreatorElement('q')
+  CreatorElement.I = CreatorElement('i')
+  CreatorElement.Ul = CreatorElement('ul')
+  CreatorElement.Ol = CreatorElement('ol')
+  CreatorElement.Li = CreatorElement('li')
+
+  CreatorElement.H1 = CreatorElement('h1')
+  CreatorElement.H2 = CreatorElement('h2')
+  CreatorElement.H3 = CreatorElement('h3')
+  CreatorElement.H4 = CreatorElement('h4')
+  CreatorElement.H5 = CreatorElement('h5')
+  CreatorElement.H6 = CreatorElement('h6')
+  CreatorElement.Hr = CreatorElement('hr')
+  CreatorElement.Br = CreatorElement('br')
+
+  CreatorElement.Script = CreatorElement('script')
+  CreatorElement.Html = CreatorElement('html')
+  CreatorElement.Body = CreatorElement('body')
+  CreatorElement.Nav = CreatorElement('nav')
+  CreatorElement.Section = CreatorElement('section')
+  CreatorElement.Article = CreatorElement('article')
+  CreatorElement.Footer = CreatorElement('footer')
+  CreatorElement.Span = CreatorElement('span')
+  CreatorElement.Div = CreatorElement('div')
+  CreatorElement.Img = CreatorElement('img')
+  CreatorElement.Video = CreatorElement('video')
+
+  CreatorElement.Form = CreatorElement('form')
+  CreatorElement.Fieldset = CreatorElement('fieldset')
+  CreatorElement.Input = CreatorElement('input')
+  CreatorElement.Label = CreatorElement('label')
+  CreatorElement.Textarea = CreatorElement('textarea')
+  CreatorElement.Select = CreatorElement('select')
+  CreatorElement.Option = CreatorElement('option')
+
+  CreatorElement.Button = CreatorElement('button')
+  CreatorElement.Iframe = CreatorElement('iframe')
+  CreatorElement.Blockquote = CreatorElement('blockquote')
+  CreatorElement.Code = CreatorElement('code')
+  CreatorElement.Pre = CreatorElement('pre')
+}
+
+/**
  * @name Arche
  *
  * @synopsis
@@ -527,50 +589,7 @@ const Arche = function (creator, options = {}) {
   )
 
   CreatorElement.creator = creator
-
-  CreatorElement.A = CreatorElement('a')
-  CreatorElement.P = CreatorElement('p')
-  CreatorElement.B = CreatorElement('b')
-  CreatorElement.Q = CreatorElement('q')
-  CreatorElement.I = CreatorElement('i')
-  CreatorElement.Ul = CreatorElement('ul')
-  CreatorElement.Ol = CreatorElement('ol')
-  CreatorElement.Li = CreatorElement('li')
-
-  CreatorElement.H1 = CreatorElement('h1')
-  CreatorElement.H2 = CreatorElement('h2')
-  CreatorElement.H3 = CreatorElement('h3')
-  CreatorElement.H4 = CreatorElement('h4')
-  CreatorElement.H5 = CreatorElement('h5')
-  CreatorElement.H6 = CreatorElement('h6')
-  CreatorElement.Hr = CreatorElement('hr')
-  CreatorElement.Br = CreatorElement('br')
-
-  CreatorElement.Script = CreatorElement('script')
-  CreatorElement.Html = CreatorElement('html')
-  CreatorElement.Body = CreatorElement('body')
-  CreatorElement.Nav = CreatorElement('nav')
-  CreatorElement.Section = CreatorElement('section')
-  CreatorElement.Article = CreatorElement('article')
-  CreatorElement.Footer = CreatorElement('footer')
-  CreatorElement.Span = CreatorElement('span')
-  CreatorElement.Div = CreatorElement('div')
-  CreatorElement.Img = CreatorElement('img')
-  CreatorElement.Video = CreatorElement('video')
-
-  CreatorElement.Form = CreatorElement('form')
-  CreatorElement.Fieldset = CreatorElement('fieldset')
-  CreatorElement.Input = CreatorElement('input')
-  CreatorElement.Label = CreatorElement('label')
-  CreatorElement.Textarea = CreatorElement('textarea')
-  CreatorElement.Select = CreatorElement('select')
-  CreatorElement.Option = CreatorElement('option')
-
-  CreatorElement.Button = CreatorElement('button')
-  CreatorElement.Iframe = CreatorElement('iframe')
-  CreatorElement.Blockquote = CreatorElement('blockquote')
-  CreatorElement.Code = CreatorElement('code')
-  CreatorElement.Pre = CreatorElement('pre')
+  __assignElementNames(CreatorElement)
 
   return CreatorElement
 }
