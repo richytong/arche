@@ -96,8 +96,12 @@ import Arche from 'https://unpkg.com/arche/es.js'
 ```coffeescript [specscript]
 Arche() -> DocumentElement
 Arche(document Document) -> DocumentElement
+
+DocumentElement(type string) -> Element
+DocumentElement(type string, props object, text string) -> Element
+
 Arche(React {
-  createElement: (type, props?, children?)=>ReactElement,
+  createElement: (type string, props? object, children?)=>ReactElement,
 }, options? {
   styled?: {
     div: function,

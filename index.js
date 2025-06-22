@@ -92,27 +92,37 @@ const memoizeCappedWithResolver = function (func, cap, resolver) {
  *
  * @synopsis
  * ```coffeescript [specscript]
- * Element = Object
+ * creator {
+ *   createElement: (
+ *     elementType string,
+ *     props? object,
+ *     children? Array<creator.Element>
+ *   )=>creator.Element
+ * }
  *
- * var type string|function,
- *   props Object,
- *   children string|Object|Array<string|Object>,
- *   element Element,
- *   creator { createElement: (type, props?, children?)=>element },
- *
- * creatorCreateElement(creator, type, props, children) -> element
+ * creatorCreateElement(
+ *   creator,
+ *   elementType string|function,
+ *   propsOrTextOrChildren object|string|Array,
+ *   textOrChildren string|Array,
+ * ) -> creator.Element
  * ```
  */
-const creatorCreateElement = function (creator, type, props, children) {
+const creatorCreateElement = function (
+  creator,
+  elementType,
+  propsOrTextOrChildren,
+  textOrChildren
+) {
   if (creator.createElement.length == 1) {
-    const element = creator.createElement(type) // document.createElement
-    for (const key in props) {
-      elementSetAttribute(element, key, props[key])
+    const element = creator.createElement(elementType) // document.createElement
+    for (const key in propsOrTextOrChildren) {
+      elementSetAttribute(element, key, propsOrTextOrChildren[key])
     }
-    const childrenLength = children.length
+    const childrenLength = textOrChildren.length
     let childrenIndex = -1
     while (++childrenIndex < childrenLength) {
-      const child = children[childrenIndex]
+      const child = textOrChildren[childrenIndex]
       if (typeof child == 'string') {
         element.appendChild(creator.createTextNode(child))
       } else {
@@ -121,7 +131,140 @@ const creatorCreateElement = function (creator, type, props, children) {
     }
     return element
   }
-  return creator.createElement(type, props, ...children) // React.createElement
+
+  return creator.createElement(
+    elementType,
+    propsOrTextOrChildren,
+    ...textOrChildren
+  )
+}
+
+/**
+ * @name CreatorElement
+ *
+ * @synopsis
+ * ```coffeescript [specscript]
+ * CreatorElement(
+ *   creator {
+ *     createElement: (
+ *       elementType string,
+ *       props? object,
+ *       children? Array<creator.Element>
+ *     )=>creator.Element
+ *   },
+ *   elementType string,
+ *   propsOrTextOrChildren object|string|Array,
+ *   textOrChildren string|Array,
+ * )
+ *   -> creator.Element
+ * ```
+ */
+function CreatorElement(
+  creator,
+  elementType,
+  propsOrTextOrChildren,
+  textOrChildren
+) {
+  if (isArray(propsOrTextOrChildren)) {
+    return creatorCreateElement(
+      creator,
+      elementType,
+      {},
+      propsOrTextOrChildren
+    )
+  }
+
+  if (typeof propsOrTextOrChildren == 'string') {
+    return creatorCreateElement(
+      creator,
+      elementType,
+      {},
+      [propsOrTextOrChildren]
+    )
+  }
+
+  if (isArray(textOrChildren)) {
+    return creatorCreateElement(
+      creator,
+      elementType,
+      propsOrTextOrChildren,
+      textOrChildren
+    )
+  }
+
+  if (textOrChildren == null) {
+    return creatorCreateElement(
+      creator,
+      elementType,
+      propsOrTextOrChildren,
+      []
+    )
+  }
+
+  return creatorCreateElement(
+    creator,
+    elementType,
+    propsOrTextOrChildren,
+    [textOrChildren]
+  )
+}
+
+
+/**
+ * @name __CreatorElement
+ *
+ * @synopsis
+ * ```coffeescript [specscript]
+ * creator {
+ *   createElement: (
+ *     elementType string,
+ *     props? object,
+ *     children? Array<creator.Element>
+ *   )=>creator.Element
+ * }
+ *
+ * __CreatorElement(creator elementType string) -> _Element function
+ *
+ * _Element(
+ *   propsOrTextOrChildren object|string|Array,
+ *   textOrChildren string|Array,
+ * ) -> creator.Element
+ * ```
+ */
+function __CreatorElement(creator, elementType) {
+  return function _CreatorElement(propsOrTextOrChildren, textOrChildren) {
+    return CreatorElement(
+      creator,
+      elementType,
+      propsOrTextOrChildren,
+      textOrChildren
+    )
+  }
+}
+
+/**
+ * @name _CreatorElement
+ *
+ * @synopsis
+ * ```coffeescript [specscript]
+ * args Array
+ *
+ * creator {
+ *   createElement: (
+ *     elementType string,
+ *     props? object,
+ *     children? Array<creator.Element>
+ *   )=>creator.Element
+ * }
+ *
+ * _CreatorElement(creator) -> _Element (...args)=>creator.Element
+ * ```
+ */
+const _CreatorElement = creator => function _Element(...args) {
+  if (args.length == 1) {
+    return __CreatorElement(creator, args[0])
+  }
+  return CreatorElement(creator, ...args)
 }
 
 /**
@@ -131,43 +274,45 @@ const creatorCreateElement = function (creator, type, props, children) {
  * ```coffeescript [specscript]
  * Element = Object
  *
- * var type string|function,
- *   props Object,
- *   children string|Object|Array<string|Object>,
- *   element Element,
- *   creator { createElement: (type, props?, children?)=>element },
- *   rootElement type=>((props, children?)|children)=>element {
- *     Script: ((props, children?)|children)=>element,
- *     Html: ((props, children?)|children)=>element,
- *     Body: (props, children?)|children)=>element,
- *     Section: (props, children?)|children)=>element,
- *     Article: (props, children?)|children)=>element,
- *     Span: (props, children?)|children)=>element,
- *     Div: (props, children?)|children)=>element,
- *     Img: (props, children?)|children)=>element,
- *     H1: (props, children?)|children)=>element,
- *     H2: (props, children?)|children)=>element,
- *     H3: (props, children?)|children)=>element,
- *     H4: (props, children?)|children)=>element,
- *     H5: (props, children?)|children)=>element,
- *     H6: (props, children?)|children)=>element,
+ * type string|function
+ * props Object
+ * children string|Object|Array<string|Object>
+ * element Element
+ * creator {
+ *   createElement: (type, props?, children?)=>element,
+ * }
+ * rootElement type=>((props, children?)|children)=>element {
+ *   Script: ((props, children?)|children)=>element,
+ *   Html: ((props, children?)|children)=>element,
+ *   Body: (props, children?)|children)=>element,
+ *   Section: (props, children?)|children)=>element,
+ *   Article: (props, children?)|children)=>element,
+ *   Span: (props, children?)|children)=>element,
+ *   Div: (props, children?)|children)=>element,
+ *   Img: (props, children?)|children)=>element,
+ *   H1: (props, children?)|children)=>element,
+ *   H2: (props, children?)|children)=>element,
+ *   H3: (props, children?)|children)=>element,
+ *   H4: (props, children?)|children)=>element,
+ *   H5: (props, children?)|children)=>element,
+ *   H6: (props, children?)|children)=>element,
  *
- *     A: (props, children?)|children)=>element,
- *     P: (props, children?)|children)=>element,
- *     B: (props, children?)|children)=>element,
- *     Q: (props, children?)|children)=>element,
- *     I: (props, children?)|children)=>element,
- *     Ul: (props, children?)|children)=>element,
- *     Ol: (props, children?)|children)=>element,
- *     Li: (props, children?)|children)=>element,
- *     Textarea: (props, children?)|children)=>element,
- *     Button: (props, children?)|children)=>element,
- *     Iframe: (props, children?)|children)=>element,
- *     Blockquote: (props, children?)|children)=>element,
- *     Br: (props, children?)|children)=>element,
- *     Code: (props, children?)|children)=>element,
- *     Pre: (props, children?)|children)=>element,
- *   }
+ *   A: (props, children?)|children)=>element,
+ *   P: (props, children?)|children)=>element,
+ *   B: (props, children?)|children)=>element,
+ *   Q: (props, children?)|children)=>element,
+ *   I: (props, children?)|children)=>element,
+ *   Ul: (props, children?)|children)=>element,
+ *   Ol: (props, children?)|children)=>element,
+ *   Li: (props, children?)|children)=>element,
+ *   Textarea: (props, children?)|children)=>element,
+ *   Button: (props, children?)|children)=>element,
+ *   Iframe: (props, children?)|children)=>element,
+ *   Blockquote: (props, children?)|children)=>element,
+ *   Br: (props, children?)|children)=>element,
+ *   Code: (props, children?)|children)=>element,
+ *   Pre: (props, children?)|children)=>element,
+ * }
  *
  * Arche(creator, options {
  *   styled?: Styled,
@@ -256,25 +401,7 @@ const Arche = function (creator, options = {}) {
     styledMemoizationCap = 1000,
   } = options
 
-  const originalRootElement = type => function creatingElement(arg0, arg1) {
-    if (isArray(arg0)) {
-      return creatorCreateElement(creator, type, {}, arg0)
-    }
-
-    if (typeof arg0 == 'string') {
-      return creatorCreateElement(creator, type, {}, [arg0])
-    }
-
-    if (isArray(arg1)) {
-      return creatorCreateElement(creator, type, arg0, arg1)
-    }
-
-    if (arg1 == null) {
-      return creatorCreateElement(creator, type, arg0, [])
-    }
-
-    return creatorCreateElement(creator, type, arg0, [arg1])
-  }
+  const originalRootElement = _CreatorElement(creator)
 
   const styledRootElement = type => {
     const styledComponent = memoizeCappedWithResolver(

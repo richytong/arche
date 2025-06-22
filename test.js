@@ -45,8 +45,15 @@ describe('Arche', () => {
         return { type: 'text', text }
       }
     }
-    const rootElement = Arche(mockDocument)
-    const { Div, H1, P, Span, Article, Button } = rootElement
+    const MockElement = Arche(mockDocument)
+    const { Div, H1, P, Span, Article, Button } = MockElement
+
+    it('create element directly', async () => {
+      const myButton = MockElement('button', { id: 'my-button' }, 'My Button')
+      assert.equal(myButton.type, 'button')
+      assert.deepEqual(myButton.children, [{ type: 'text', text: 'My Button' }])
+      assert.equal(myButton.id, 'my-button')
+    })
 
     it('tree structure', async () => {
       const listener = event => {
@@ -88,8 +95,8 @@ describe('Arche', () => {
         return [type, props || {}, children || []]
       },
     }
-    const rootElement = Arche(mockReact)
-    const { Div, H1, P, Span, Article } = rootElement
+    const MockReactElement = Arche(mockReact)
+    const { Div, H1, P, Span, Article } = MockReactElement
 
     it('tree structure', async () => {
       const el = Div([
@@ -126,11 +133,11 @@ describe('Arche', () => {
       article: get0,
     }
 
-    const rootElement = Arche(mockReact, {
+    const MockReactElement = Arche(mockReact, {
       styled,
       styledMemoizationCap: 1,
     })
-    const { Div, H1, P, Span, Article } = rootElement
+    const { Div, H1, P, Span, Article } = MockReactElement
 
     it('tree structure 1', () => {
       const el = Div([
