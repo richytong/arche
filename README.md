@@ -76,7 +76,7 @@ render(Example())
 // </div>
 ```
 
-# Installation
+## Installation
 with `npm`
 ```bash
 npm i arche
@@ -92,29 +92,9 @@ browser module
 import Arche from 'https://unpkg.com/arche/es.js'
 ```
 
-# Syntax
-```coffeescript [specscript]
-Arche() -> DocumentElement
-Arche(document Document) -> DocumentElement
+## Usage
+Set Arche elements globally for a better developer experience.
 
-DocumentElement(type string) -> Element
-DocumentElement(type string, props object, text string) -> Element
-
-Arche(React {
-  createElement: (type string, props? object, children?)=>ReactElement,
-}, options? {
-  styled?: {
-    div: function,
-    p: funcion,
-    span: function,
-    // etc
-  },
-  styledMemoizationCap?: number, // defaults to 1000
-}) -> ReactElement
-```
-
-# Usage
-Set Arche elements globally for a great developer experience.
 ```javascript
 // global.js
 
@@ -131,6 +111,77 @@ for (const elementName in ReactElement) {
 window.Aside = ReactElement('aside')
 window.Svg = ReactElement('svg')
 window.Path = ReactElement('path')
+```
+
+## Syntax
+```coffeescript [specscript]
+Arche() -> DocumentElement
+Arche(document Document) -> DocumentElement
+
+DocumentElement(elementType string) -> Element
+DocumentElement(elementType string, props object, text string) -> Element
+
+Arche(React {
+  createElement: (
+    elementType string,
+    props? object,
+    children? string|Array<React.Element|string>
+  )=>ReactElement
+}) -> ReactElement
+
+ReactElement(elementType string, props object, text string) -> React.Element
+
+ReactElement(
+  elementType string,
+  props object,
+  children Array<React.Element|string>
+) -> React.Element
+
+ReactElement(elementType string) -> TypedReactElement function
+
+TypedReactElement(props object, text string) -> React.Element
+TypedReactElement(text string)-> React.Element
+TypedReactElement(children Array<React.Element|string>)-> React.Element
+
+ReactElement.A -> TypedReactElement
+ReactElement.P -> TypedReactElement
+ReactElement.B -> TypedReactElement
+ReactElement.Q -> TypedReactElement
+ReactElement.I -> TypedReactElement
+ReactElement.Ul -> TypedReactElement
+ReactElement.Ol -> TypedReactElement
+ReactElement.Li -> TypedReactElement
+ReactElement.H1 -> TypedReactElement
+ReactElement.H2 -> TypedReactElement
+ReactElement.H3 -> TypedReactElement
+ReactElement.H4 -> TypedReactElement
+ReactElement.H5 -> TypedReactElement
+ReactElement.H6 -> TypedReactElement
+ReactElement.Hr -> TypedReactElement
+ReactElement.Br -> TypedReactElement
+ReactElement.Script -> TypedReactElement
+ReactElement.Html -> TypedReactElement
+ReactElement.Body -> TypedReactElement
+ReactElement.Nav -> TypedReactElement
+ReactElement.Section -> TypedReactElement
+ReactElement.Article -> TypedReactElement
+ReactElement.Footer -> TypedReactElement
+ReactElement.Span -> TypedReactElement
+ReactElement.Div -> TypedReactElement
+ReactElement.Img -> TypedReactElement
+ReactElement.Video -> TypedReactElement
+ReactElement.Form -> TypedReactElement
+ReactElement.Fieldset -> TypedReactElement
+ReactElement.Input -> TypedReactElement
+ReactElement.Label -> TypedReactElement
+ReactElement.Textarea -> TypedReactElement
+ReactElement.Select -> TypedReactElement
+ReactElement.Option -> TypedReactElement
+ReactElement.Button -> TypedReactElement
+ReactElement.Iframe -> TypedReactElement
+ReactElement.Blockquote -> TypedReactElement
+ReactElement.Code -> TypedReactElement
+ReactElement.Pre -> TypedReactElement
 ```
 
 ## Using styled
@@ -153,6 +204,46 @@ const MyComponent = ReactElement(props => {
     `,
   })
 })
+```
+
+## Syntax with styled
+```coffeescript [specscript]
+strings Array<string>
+values Array<any>
+tagFunctionArgs Array<strings, ...values>
+
+type Styled = {
+  h1: (...tagFunctionArgs)=>React.Element,
+  h2: (...tagFunctionArgs)=>React.Element,
+  h3: (...tagFunctionArgs)=>React.Element,
+  h4: (...tagFunctionArgs)=>React.Element,
+  h5: (...tagFunctionArgs)=>React.Element,
+  div: (...tagFunctionArgs)=>React.Element,
+  button: (...tagFunctionArgs)=>React.Element,
+  a: (...tagFunctionArgs)=>React.Element,
+  p: (...tagFunctionArgs)=>React.Element,
+  span: (...tagFunctionArgs)=>React.Element,
+  img: (...tagFunctionArgs)=>React.Element,
+  ul: (...tagFunctionArgs)=>React.Element,
+  ol: (...tagFunctionArgs)=>React.Element,
+  li: (...tagFunctionArgs)=>React.Element,
+  form: (...tagFunctionArgs)=>React.Element,
+  article: (...tagFunctionArgs)=>React.Element,
+  main: (...tagFunctionArgs)=>React.Element,
+  section: (...tagFunctionArgs)=>React.Element,
+  nav: (...tagFunctionArgs)=>React.Element,
+}
+
+Arche(React {
+  createElement: (
+    elementType string,
+    props? object,
+    children? string|Array<React.Element|string>,
+  )=>ReactElement
+}, options {
+  styled: Styled,
+  styledMemoizationCap?: number
+}) -> ReactElement
 ```
 
 ## Using React Context
