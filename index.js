@@ -270,7 +270,7 @@ function _CreatorElement(creator) {
 }
 
 /**
- * @name __StyledCreatorElement
+ * @name $__StyledCreatorElement
  *
  * @synopsis
  * ```coffeescript [specscript]
@@ -282,7 +282,7 @@ function _CreatorElement(creator) {
  *   )=>creator.Element
  * }
  *
- * __StyledCreatorElement(
+ * $__StyledCreatorElement(
  *   creator,
  *   options {
  *     styled Styled,
@@ -298,7 +298,7 @@ function _CreatorElement(creator) {
  * ) -> creator.Element
  * ```
  */
-function __StyledCreatorElement(creator, options) {
+function $__StyledCreatorElement(creator, options) {
   const { styled, styledMemoizationCap } = options
   return function _StyledCreatorElement(elementType) {
     const styledComponent = memoizeCappedWithResolver(
@@ -575,7 +575,7 @@ const Arche = function (creator, options = {}) {
 
   const OriginalCreatorElement = _CreatorElement(creator)
 
-  const StyledCreatorElement = __StyledCreatorElement(creator, {
+  const StyledCreatorElement = $__StyledCreatorElement(creator, {
     styled,
     styledMemoizationCap,
   })
