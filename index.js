@@ -108,7 +108,7 @@ const memoizeCappedWithResolver = function (func, cap, resolver) {
  * ) -> creator.Element
  * ```
  */
-const creatorCreateElement = function (
+function creatorCreateElement(
   creator,
   elementType,
   propsOrTextOrChildren,
@@ -260,11 +260,121 @@ function __CreatorElement(creator, elementType) {
  * _CreatorElement(creator) -> _Element (...args)=>creator.Element
  * ```
  */
-const _CreatorElement = creator => function _Element(...args) {
-  if (args.length == 1) {
-    return __CreatorElement(creator, args[0])
+function _CreatorElement(creator) {
+  return function _Element(...args) {
+    if (args.length == 1) {
+      return __CreatorElement(creator, args[0])
+    }
+    return CreatorElement(creator, ...args)
   }
-  return CreatorElement(creator, ...args)
+}
+
+/**
+ * @name __StyledCreatorElement
+ *
+ * @synopsis
+ * ```coffeescript [specscript]
+ * creator {
+ *   createElement: (
+ *     elementType string,
+ *     props? object,
+ *     children? Array<creator.Element>
+ *   )=>creator.Element
+ * }
+ *
+ * __StyledCreatorElement(
+ *   creator,
+ *   options {
+ *     styled Styled,
+ *     styledMemoizationCap number,
+ *   }
+ * ) -> _StyledCreatorElement function
+ *
+ * _StyledCreatorElement(elementType string) -> _StyledElement function
+ *
+ * _StyledElement(
+ *   propsOrTextOrChildren object|string|Array,
+ *   textOrChildren string|Array,
+ * ) -> creator.Element
+ * ```
+ */
+function __StyledCreatorElement(creator, options) {
+  const { styled, styledMemoizationCap } = options
+  return function _StyledCreatorElement(elementType) {
+    const styledComponent = memoizeCappedWithResolver(
+      styled[elementType],
+      styledMemoizationCap,
+      array => array[0],
+    )
+
+    return function _StyledElement(propsOrTextOrChildren, textOrChildren) {
+      if (isArray(propsOrTextOrChildren)) {
+        return creatorCreateElement(
+          creator,
+          elementType,
+          {},
+          propsOrTextOrChildren
+        )
+      }
+
+      if (typeof propsOrTextOrChildren == 'string') {
+        return creatorCreateElement(
+          creator,
+          elementType,
+          {},
+          [propsOrTextOrChildren]
+        )
+      }
+
+      if (isArray(textOrChildren)) {
+        if (propsOrTextOrChildren == null || propsOrTextOrChildren.css == null) {
+          return creatorCreateElement(
+            creator,
+            elementType,
+            propsOrTextOrChildren,
+            textOrChildren
+          )
+        }
+        const { css, ...props } = propsOrTextOrChildren
+        return creatorCreateElement(
+          creator,
+          styledComponent([css]),
+          props,
+          textOrChildren
+        )
+      }
+
+      if (textOrChildren == null) {
+        if (propsOrTextOrChildren == null || propsOrTextOrChildren.css == null) {
+          return creatorCreateElement(
+            creator,
+            elementType,
+            propsOrTextOrChildren,
+            []
+          )
+        }
+        const { css, ...props } = propsOrTextOrChildren
+        return creatorCreateElement(creator, styledComponent([css]), props, [])
+      }
+
+      if (propsOrTextOrChildren == null || propsOrTextOrChildren.css == null) {
+        return creatorCreateElement(
+          creator,
+          elementType,
+          propsOrTextOrChildren,
+          [textOrChildren]
+        )
+      }
+
+      const { css, ...props } = propsOrTextOrChildren
+      return creatorCreateElement(
+        creator,
+        styledComponent([css]),
+        props,
+        [textOrChildren]
+      )
+    }
+  }
 }
 
 /**
@@ -401,8 +511,14 @@ const Arche = function (creator, options = {}) {
     styledMemoizationCap = 1000,
   } = options
 
-  const originalRootElement = _CreatorElement(creator)
+  const OriginalCreatorElement = _CreatorElement(creator)
 
+  const StyledCreatorElement = __StyledCreatorElement(creator, {
+    styled,
+    styledMemoizationCap,
+  })
+
+    /*
   const styledRootElement = type => {
     const styledComponent = memoizeCappedWithResolver(
       styled[type],
@@ -442,62 +558,63 @@ const Arche = function (creator, options = {}) {
       return creatorCreateElement(creator, styledComponent([css]), props, [arg1])
     }
   }
+  */
 
-  const rootElement = (
+  const CreatorElement = (
     styled == null
-    ? originalRootElement
+    ? OriginalCreatorElement
     : type => typeof type == 'string'
-      ? styledRootElement(type)
-      : originalRootElement(type)
+      ? StyledCreatorElement(type)
+      : OriginalCreatorElement(type)
   )
 
-  rootElement.creator = creator
+  CreatorElement.creator = creator
 
-  rootElement.A = rootElement('a')
-  rootElement.P = rootElement('p')
-  rootElement.B = rootElement('b')
-  rootElement.Q = rootElement('q')
-  rootElement.I = rootElement('i')
-  rootElement.Ul = rootElement('ul')
-  rootElement.Ol = rootElement('ol')
-  rootElement.Li = rootElement('li')
+  CreatorElement.A = CreatorElement('a')
+  CreatorElement.P = CreatorElement('p')
+  CreatorElement.B = CreatorElement('b')
+  CreatorElement.Q = CreatorElement('q')
+  CreatorElement.I = CreatorElement('i')
+  CreatorElement.Ul = CreatorElement('ul')
+  CreatorElement.Ol = CreatorElement('ol')
+  CreatorElement.Li = CreatorElement('li')
 
-  rootElement.H1 = rootElement('h1')
-  rootElement.H2 = rootElement('h2')
-  rootElement.H3 = rootElement('h3')
-  rootElement.H4 = rootElement('h4')
-  rootElement.H5 = rootElement('h5')
-  rootElement.H6 = rootElement('h6')
-  rootElement.Hr = rootElement('hr')
-  rootElement.Br = rootElement('br')
+  CreatorElement.H1 = CreatorElement('h1')
+  CreatorElement.H2 = CreatorElement('h2')
+  CreatorElement.H3 = CreatorElement('h3')
+  CreatorElement.H4 = CreatorElement('h4')
+  CreatorElement.H5 = CreatorElement('h5')
+  CreatorElement.H6 = CreatorElement('h6')
+  CreatorElement.Hr = CreatorElement('hr')
+  CreatorElement.Br = CreatorElement('br')
 
-  rootElement.Script = rootElement('script')
-  rootElement.Html = rootElement('html')
-  rootElement.Body = rootElement('body')
-  rootElement.Nav = rootElement('nav')
-  rootElement.Section = rootElement('section')
-  rootElement.Article = rootElement('article')
-  rootElement.Footer = rootElement('footer')
-  rootElement.Span = rootElement('span')
-  rootElement.Div = rootElement('div')
-  rootElement.Img = rootElement('img')
-  rootElement.Video = rootElement('video')
+  CreatorElement.Script = CreatorElement('script')
+  CreatorElement.Html = CreatorElement('html')
+  CreatorElement.Body = CreatorElement('body')
+  CreatorElement.Nav = CreatorElement('nav')
+  CreatorElement.Section = CreatorElement('section')
+  CreatorElement.Article = CreatorElement('article')
+  CreatorElement.Footer = CreatorElement('footer')
+  CreatorElement.Span = CreatorElement('span')
+  CreatorElement.Div = CreatorElement('div')
+  CreatorElement.Img = CreatorElement('img')
+  CreatorElement.Video = CreatorElement('video')
 
-  rootElement.Form = rootElement('form')
-  rootElement.Fieldset = rootElement('fieldset')
-  rootElement.Input = rootElement('input')
-  rootElement.Label = rootElement('label')
-  rootElement.Textarea = rootElement('textarea')
-  rootElement.Select = rootElement('select')
-  rootElement.Option = rootElement('option')
+  CreatorElement.Form = CreatorElement('form')
+  CreatorElement.Fieldset = CreatorElement('fieldset')
+  CreatorElement.Input = CreatorElement('input')
+  CreatorElement.Label = CreatorElement('label')
+  CreatorElement.Textarea = CreatorElement('textarea')
+  CreatorElement.Select = CreatorElement('select')
+  CreatorElement.Option = CreatorElement('option')
 
-  rootElement.Button = rootElement('button')
-  rootElement.Iframe = rootElement('iframe')
-  rootElement.Blockquote = rootElement('blockquote')
-  rootElement.Code = rootElement('code')
-  rootElement.Pre = rootElement('pre')
+  CreatorElement.Button = CreatorElement('button')
+  CreatorElement.Iframe = CreatorElement('iframe')
+  CreatorElement.Blockquote = CreatorElement('blockquote')
+  CreatorElement.Code = CreatorElement('code')
+  CreatorElement.Pre = CreatorElement('pre')
 
-  return rootElement
+  return CreatorElement
 }
 
 return Arche
