@@ -134,9 +134,9 @@ DocumentElement(
 
 DocumentElement(elementType string) -> TypedDocumentElement
 
-TypedDocumentElement(props object, text string) -> React.Element
-TypedDocumentElement(text string)-> React.Element
-TypedDocumentElement(children Array<Element|string>)-> React.Element
+TypedDocumentElement(props object, text string) -> Element
+TypedDocumentElement(text string)-> Element
+TypedDocumentElement(children Array<Element|string>)-> Element
 
 TypedDocumentElement.A -> TypedDocumentElement
 TypedDocumentElement.P -> TypedDocumentElement
