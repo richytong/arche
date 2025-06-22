@@ -1,5 +1,5 @@
 /**
- * Arche v0.3.9
+ * Arche v0.3.10
  * https://github.com/richytong/arche
  * (c) 2020-2023 Richard Tong
  * Arche may be freely distributed under the MIT license.
@@ -237,6 +237,14 @@ const creatorCreateElement = function (creator, type, props, children) {
  */
 
 const Arche = function (creator, options = {}) {
+  if (creator == null && typeof document != 'undefined') {
+    creator = document
+  }
+
+  if (creator == null) {
+    throw new TypeError('creator not defined')
+  }
+
   const {
     styled,
     styledMemoizationCap = 1000,
@@ -309,6 +317,8 @@ const Arche = function (creator, options = {}) {
       ? styledRootElement(type)
       : originalRootElement(type)
   )
+
+  rootElement.creator = creator
 
   rootElement.A = rootElement('a')
   rootElement.P = rootElement('p')

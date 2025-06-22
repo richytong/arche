@@ -1,5 +1,5 @@
 /**
- * Arche v0.3.9
+ * Arche v0.3.10
  * https://github.com/richytong/arche
  * (c) 2020-2023 Richard Tong
  * Arche may be freely distributed under the MIT license.
