@@ -100,20 +100,19 @@ Set Arche globally for a better developer experience.
 
 ```javascript
 // global.js
+const DocumentElement = Arche()
 
-const ReactElement = Arche(React)
+window.DocumentElement = DocumentElement
 
-window.ReactElement = ReactElement
-
-for (const elementName in ReactElement) {
-  window[elementName] = ReactElement[elementName]
+for (const elementName in DocumentElement) {
+  window[elementName] = DocumentElement[elementName]
 }
 
 // Arche for now does not export every element
 // create the ones you need like so
-window.Aside = ReactElement('aside')
-window.Svg = ReactElement('svg')
-window.Path = ReactElement('path')
+window.Aside = DocumentElement('aside')
+window.Svg = DocumentElement('svg')
+window.Path = DocumentElement('path')
 ```
 
 ## Syntax
