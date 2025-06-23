@@ -8,7 +8,7 @@
 npm version patch|minor|major
 ```
 
-2. Copy `index.js` to `es.js` and `index.mjs`
+2. Copy everything in the scope starting with 'use strict' in `index.js` to `es.js` and `index.mjs`
 
 3. Manually update the code versions and year
 
