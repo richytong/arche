@@ -282,6 +282,37 @@ TypedReactElement(
 TypedReactElement(children Array<React.Element|string>) -> reactElement React.Element
 ```
 
+## Using React Context
+To use React Context with Arche, wrap `YourContext.Provider` with `ReactElement` and supply `value` as a prop, specifying children in the next argument.
+
+JSX example:
+```javascript
+function ArticleWrapper () {
+  const [theme, setTheme] = React.useState(themes[0])
+
+  return (
+    <ThemeContext.Provider value={{
+      theme,
+      changeTheme: setTheme
+    }}>
+      <ThemeSwitcher />
+      <Article />
+    </ThemeContext.Provider>
+  )
+}
+```
+
+Translates to the following with Arche:
+```javascript
+const ArticleWrapper = ReactElement(() => {
+  const [theme, setTheme] = React.useState(themes[0])
+
+  return ReactElement(ThemeContext.Provider)({
+    value: { theme, changeTheme: setTheme },
+  }, [ThemeSwitcher(), Article()])
+})
+```
+
 ## Using styled
 Arche accepts a `styled` option from css-in-js libraries like [Styled Components](https://styled-components.com/) to enable a `css` prop on `ReactElement` and `TypedReactElement`.
 
@@ -409,33 +440,19 @@ TypedReactElement(
 TypedReactElement(children Array<React.Element|string>) -> reactElement React.Element
 ```
 
-## Using React Context
-To use React Context with Arche, wrap `YourContext.Provider` with `ReactElement` and supply `value` as a prop, specifying children in the next argument.
+# Contributing
+Your feedback and contributions are welcome. If you have a suggestion, please raise an issue. Prior to that, please search through the issues first in case your suggestion has been made already. If you decide to work on an issue, please create a pull request.
 
-JSX example:
-```javascript
-function ArticleWrapper () {
-  const [theme, setTheme] = React.useState(themes[0])
+Pull requests should provide some basic context and link the relevant issue. Here is an [example pull request](https://github.com/a-synchronous/rubico/pull/12). If you are interested in contributing, the [help wanted](https://github.com/richytong/arche/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) tag is a good place to start.
 
-  return (
-    <ThemeContext.Provider value={{
-      theme,
-      changeTheme: setTheme
-    }}>
-      <ThemeSwitcher />
-      <Article />
-    </ThemeContext.Provider>
-  )
-}
-```
+For more information please see [CONTRIBUTING.md](/CONTRIBUTING.md)
 
-Translates to the following with Arche:
-```javascript
-const ArticleWrapper = ReactElement(() => {
-  const [theme, setTheme] = React.useState(themes[0])
+# License
+rubico is [MIT Licensed](https://github.com/a-synchronous/rubico/blob/master/LICENSE).
 
-  return ReactElement(ThemeContext.Provider)({
-    value: { theme, changeTheme: setTheme },
-  }, [ThemeSwitcher(), Article()])
-})
-```
+# Support
+ * minimum Node.js version: 14
+ * minimum Chrome version: 63
+ * minimum Firefox version: 57
+ * minimum Edge version: 79
+ * minimum Safari version: 11.1
