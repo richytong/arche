@@ -136,7 +136,7 @@ To use Arche with [React](https://react.dev/), simply provide the React library.
 const ReactElement = Arche(React)
 ```
 
-Create dynamic components with props:
+Create dynamic components with props.
 
 ```javascript
 const ReactElement = Arche(React)
@@ -159,7 +159,8 @@ render(UserCard({ firstName: 'George', lastName: 'Henry', age: 32 }))
 // </div>
 ```
 
-Complete interoperability with React hooks (converted from [this example](https://reactjs.org/docs/hooks-intro.html)):
+Complete interoperability with React hooks (converted from [this example](https://reactjs.org/docs/hooks-intro.html)).
+
 ```javascript
 const ReactElement = Arche(React)
 const { Div, P, Button } = ReactElement
