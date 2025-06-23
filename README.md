@@ -80,11 +80,13 @@ render(Example())
 
 ## Installation
 with `npm`
+
 ```bash
 npm i arche
 ```
 
 browser script, global `Arche`
+
 ```html
 <script src="https://unpkg.com/arche"></script>
 ```
@@ -94,7 +96,6 @@ browser module
 import Arche from 'https://unpkg.com/arche/es.js'
 ```
 
-## Usage
 Set Arche globally for a better developer experience.
 
 ```javascript
