@@ -85,13 +85,13 @@ with `npm`
 npm i arche
 ```
 
-browser script, global `Arche`
+with browser script, sets `window.Arche`
 
 ```html
 <script src="https://unpkg.com/arche"></script>
 ```
 
-browser module
+with [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
 ```javascript
 import Arche from 'https://unpkg.com/arche/es.js'
 ```
