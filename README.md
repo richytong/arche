@@ -269,30 +269,28 @@ const MyComponent = ReactElement(props => {
 
 ## Syntax with styled
 ```coffeescript [specscript]
-strings Array<string>
-values Array<any>
-tagFunctionArgs Array<strings, ...values>
+([css string])=>(reactElement React.Element) -> StyledComponent
 
 type Styled = {
-  h1: (...tagFunctionArgs)=>React.Element,
-  h2: (...tagFunctionArgs)=>React.Element,
-  h3: (...tagFunctionArgs)=>React.Element,
-  h4: (...tagFunctionArgs)=>React.Element,
-  h5: (...tagFunctionArgs)=>React.Element,
-  div: (...tagFunctionArgs)=>React.Element,
-  button: (...tagFunctionArgs)=>React.Element,
-  a: (...tagFunctionArgs)=>React.Element,
-  p: (...tagFunctionArgs)=>React.Element,
-  span: (...tagFunctionArgs)=>React.Element,
-  img: (...tagFunctionArgs)=>React.Element,
-  ul: (...tagFunctionArgs)=>React.Element,
-  ol: (...tagFunctionArgs)=>React.Element,
-  li: (...tagFunctionArgs)=>React.Element,
-  form: (...tagFunctionArgs)=>React.Element,
-  article: (...tagFunctionArgs)=>React.Element,
-  main: (...tagFunctionArgs)=>React.Element,
-  section: (...tagFunctionArgs)=>React.Element,
-  nav: (...tagFunctionArgs)=>React.Element,
+  h1: StyledComponent,
+  h2: StyledComponent,
+  h3: StyledComponent,
+  h4: StyledComponent,
+  h5: StyledComponent,
+  div: StyledComponent,
+  button: StyledComponent,
+  a: StyledComponent,
+  p: StyledComponent,
+  span: StyledComponent,
+  img: StyledComponent,
+  ul: StyledComponent,
+  ol: StyledComponent,
+  li: StyledComponent,
+  form: StyledComponent,
+  article: StyledComponent,
+  main: StyledComponent,
+  section: StyledComponent,
+  nav: StyledComponent,
 }
 
 Arche(React {
