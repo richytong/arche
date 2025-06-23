@@ -180,8 +180,8 @@ TypedDocumentElement(children Array<Element|string>) -> element Element
 Arche(React {
   createElement: (
     elementType string,
-    props? object,
-    children? string|Array<React.Element|string>
+    props object,
+    children string|Array<React.Element|string>
   )=>(reactElement React.Element)
 }) -> ReactElement
 
@@ -301,7 +301,7 @@ Arche(React {
   createElement: (
     elementType string,
     props object,
-    children? string|Array<React.Element|string>
+    textOrChildren string|Array<React.Element|string>
   )=>(reactElement React.Element)
 }, options {
   styled: Styled,
@@ -310,13 +310,13 @@ Arche(React {
 
 ReactElement(
   elementType string,
-  propsWithCss? { css: string, ...props object },
+  propsWithCss { css: string, ...props object },
   text string
 ) -> reactElement React.Element
 
 ReactElement(
   elementType string,
-  propsWithCss? { css: string, ...props object },
+  propsWithCss { css: string, ...props object },
   children Array<React.Element|string>
 ) -> reactElement React.Element
 
@@ -361,11 +361,15 @@ ReactElement.Blockquote -> TypedReactElement
 ReactElement.Code -> TypedReactElement
 ReactElement.Pre -> TypedReactElement
 
-TypedReactElement(props object, text string) -> reactElement React.Element
+TypedReactElement(
+  propsWithCss { css: string, ...props object },
+  text string
+) -> reactElement React.Element
+
 TypedReactElement(text string) -> reactElement React.Element
 
 TypedReactElement(
-  props object,
+  propsWithCss { css: string, ...props object },
   children Array<React.Element|string>
 ) -> reactElement React.Element
 
