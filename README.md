@@ -108,8 +108,8 @@ for (const elementName in DocumentElement) {
   window[elementName] = DocumentElement[elementName]
 }
 
-// Arche for now does not export every element
-// create the ones you need like so
+// Arche does not provide a typed element for every HTML element
+// create missing elements like so:
 window.Aside = DocumentElement('aside')
 window.Svg = DocumentElement('svg')
 window.Path = DocumentElement('path')
