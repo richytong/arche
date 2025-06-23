@@ -96,7 +96,7 @@ with [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/
 import Arche from 'https://unpkg.com/arche/es.js'
 ```
 
-Set Arche globally for a better developer experience.
+Set `DocumentElement` globally for a better developer experience.
 
 ```javascript
 // global.js
@@ -176,14 +176,47 @@ TypedDocumentElement(props object, text string) -> element Element
 TypedDocumentElement(text string) -> element Element
 TypedDocumentElement(props object, children Array<Element|string>) -> element Element
 TypedDocumentElement(children Array<Element|string>) -> element Element
+```
 
-Arche(React {
+## Using React
+To use Arche with [React](https://react.dev/), simply provide the React library.
+
+```javascript
+const ReactElement = Arche(React)
+
+const { Div, H1, P, Button, Img } = ReactElement
+```
+
+Set `ReactElement` globally for a better developer experience.
+
+```javascript
+// global.js
+const ReactElement = Arche(React)
+
+window.ReactElement = ReactElement
+
+for (const elementName in ReactElement) {
+  window[elementName] = ReactElement[elementName]
+}
+
+// set missing elements
+window.Aside = ReactElement('aside')
+window.Svg = ReactElement('svg')
+window.Path = ReactElement('path')
+```
+
+## Syntax with React
+
+```coffeescript [specscript]
+type React = {
   createElement: (
     elementType string,
     props object,
     children string|Array<React.Element|string>
   )=>(reactElement React.Element)
-}) -> ReactElement
+}
+
+Arche(React) -> ReactElement
 
 ReactElement(
   elementType string,
