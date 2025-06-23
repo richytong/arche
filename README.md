@@ -29,55 +29,6 @@ document.getElementById('#my-container').appendChild(myElement)
 // </div>
 ```
 
-Create dynamic components with props:
-```javascript
-// provide the React library
-const ReactElement = Arche(React)
-
-const { Div, H1, P, Button, Img } = ReactElement
-
-const UserCard = ReactElement(({
-  firstName, lastName, age,
-}) => Div([
-  H1(`${firstName} ${lastName}`),
-  Img({ src: 'https://via.placeholder.com/150x150', alt: 'placeholder' }),
-  P({ style: { color: 'lightgrey' } }, `age: ${age}`),
-]))
-
-render(UserCard({ firstName: 'George', lastName: 'Henry', age: 32 }))
-// <div>
-//   <h1>George Henry</h1>
-//   <img src="https://via.placeholder.com/150x150" alt="placeholder">
-//   <p style="color: lightgrey">age: 32</p>
-// </div>
-```
-
-Complete interoperability with React hooks (converted from [this example](https://reactjs.org/docs/hooks-intro.html)):
-```javascript
-const ReactElement = Arche(React)
-const { Div, P, Button } = ReactElement
-const { useState } = React
-
-const Example = ReactElement(() => {
-  const [count, setCount] = useState(0)
-
-  return Div([
-    P(`You clicked ${count} times`),
-    Button({
-      onClick() {
-        setCount(count + 1)
-      },
-    }, 'Click me'),
-  ])
-})
-
-render(Example())
-// <div>
-//   <p>You clicked {count} times</p>
-//   <button onclick="setCount(count + 1)">Click me</button>
-// </div>
-```
-
 ## Installation
 with `npm`
 
@@ -183,8 +134,55 @@ To use Arche with [React](https://react.dev/), simply provide the React library.
 
 ```javascript
 const ReactElement = Arche(React)
+```
+
+Create dynamic components with props:
+
+```javascript
+const ReactElement = Arche(React)
 
 const { Div, H1, P, Button, Img } = ReactElement
+
+const UserCard = ReactElement(({
+  firstName, lastName, age,
+}) => Div([
+  H1(`${firstName} ${lastName}`),
+  Img({ src: 'https://via.placeholder.com/150x150', alt: 'placeholder' }),
+  P({ style: { color: 'lightgrey' } }, `age: ${age}`),
+]))
+
+render(UserCard({ firstName: 'George', lastName: 'Henry', age: 32 }))
+// <div>
+//   <h1>George Henry</h1>
+//   <img src="https://via.placeholder.com/150x150" alt="placeholder">
+//   <p style="color: lightgrey">age: 32</p>
+// </div>
+```
+
+Complete interoperability with React hooks (converted from [this example](https://reactjs.org/docs/hooks-intro.html)):
+```javascript
+const ReactElement = Arche(React)
+const { Div, P, Button } = ReactElement
+const { useState } = React
+
+const Example = ReactElement(() => {
+  const [count, setCount] = useState(0)
+
+  return Div([
+    P(`You clicked ${count} times`),
+    Button({
+      onClick() {
+        setCount(count + 1)
+      },
+    }, 'Click me'),
+  ])
+})
+
+render(Example())
+// <div>
+//   <p>You clicked {count} times</p>
+//   <button onclick="setCount(count + 1)">Click me</button>
+// </div>
 ```
 
 Set `ReactElement` globally for a better developer experience.
