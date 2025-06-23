@@ -132,50 +132,49 @@ DocumentElement(
 ) -> element Element
 
 DocumentElement(elementType string) -> TypedDocumentElement
+DocumentElement.A -> TypedDocumentElement
+DocumentElement.P -> TypedDocumentElement
+DocumentElement.B -> TypedDocumentElement
+DocumentElement.Q -> TypedDocumentElement
+DocumentElement.I -> TypedDocumentElement
+DocumentElement.Ul -> TypedDocumentElement
+DocumentElement.Ol -> TypedDocumentElement
+DocumentElement.Li -> TypedDocumentElement
+DocumentElement.H1 -> TypedDocumentElement
+DocumentElement.H2 -> TypedDocumentElement
+DocumentElement.H3 -> TypedDocumentElement
+DocumentElement.H4 -> TypedDocumentElement
+DocumentElement.H5 -> TypedDocumentElement
+DocumentElement.H6 -> TypedDocumentElement
+DocumentElement.Hr -> TypedDocumentElement
+DocumentElement.Br -> TypedDocumentElement
+DocumentElement.Script -> TypedDocumentElement
+DocumentElement.Html -> TypedDocumentElement
+DocumentElement.Body -> TypedDocumentElement
+DocumentElement.Nav -> TypedDocumentElement
+DocumentElement.Section -> TypedDocumentElement
+DocumentElement.Article -> TypedDocumentElement
+DocumentElement.Footer -> TypedDocumentElement
+DocumentElement.Span -> TypedDocumentElement
+DocumentElement.Div -> TypedDocumentElement
+DocumentElement.Img -> TypedDocumentElement
+DocumentElement.Video -> TypedDocumentElement
+DocumentElement.Form -> TypedDocumentElement
+DocumentElement.Fieldset -> TypedDocumentElement
+DocumentElement.Input -> TypedDocumentElement
+DocumentElement.Label -> TypedDocumentElement
+DocumentElement.Textarea -> TypedDocumentElement
+DocumentElement.Select -> TypedDocumentElement
+DocumentElement.Option -> TypedDocumentElement
+DocumentElement.Button -> TypedDocumentElement
+DocumentElement.Iframe -> TypedDocumentElement
+DocumentElement.Blockquote -> TypedDocumentElement
+DocumentElement.Code -> TypedDocumentElement
+DocumentElement.Pre -> TypedDocumentElement
 
 TypedDocumentElement(props object, text string) -> element Element
 TypedDocumentElement(text string) -> element Element
 TypedDocumentElement(children Array<Element|string>) -> element Element
-
-TypedDocumentElement.A -> TypedDocumentElement
-TypedDocumentElement.P -> TypedDocumentElement
-TypedDocumentElement.B -> TypedDocumentElement
-TypedDocumentElement.Q -> TypedDocumentElement
-TypedDocumentElement.I -> TypedDocumentElement
-TypedDocumentElement.Ul -> TypedDocumentElement
-TypedDocumentElement.Ol -> TypedDocumentElement
-TypedDocumentElement.Li -> TypedDocumentElement
-TypedDocumentElement.H1 -> TypedDocumentElement
-TypedDocumentElement.H2 -> TypedDocumentElement
-TypedDocumentElement.H3 -> TypedDocumentElement
-TypedDocumentElement.H4 -> TypedDocumentElement
-TypedDocumentElement.H5 -> TypedDocumentElement
-TypedDocumentElement.H6 -> TypedDocumentElement
-TypedDocumentElement.Hr -> TypedDocumentElement
-TypedDocumentElement.Br -> TypedDocumentElement
-TypedDocumentElement.Script -> TypedDocumentElement
-TypedDocumentElement.Html -> TypedDocumentElement
-TypedDocumentElement.Body -> TypedDocumentElement
-TypedDocumentElement.Nav -> TypedDocumentElement
-TypedDocumentElement.Section -> TypedDocumentElement
-TypedDocumentElement.Article -> TypedDocumentElement
-TypedDocumentElement.Footer -> TypedDocumentElement
-TypedDocumentElement.Span -> TypedDocumentElement
-TypedDocumentElement.Div -> TypedDocumentElement
-TypedDocumentElement.Img -> TypedDocumentElement
-TypedDocumentElement.Video -> TypedDocumentElement
-TypedDocumentElement.Form -> TypedDocumentElement
-TypedDocumentElement.Fieldset -> TypedDocumentElement
-TypedDocumentElement.Input -> TypedDocumentElement
-TypedDocumentElement.Label -> TypedDocumentElement
-TypedDocumentElement.Textarea -> TypedDocumentElement
-TypedDocumentElement.Select -> TypedDocumentElement
-TypedDocumentElement.Option -> TypedDocumentElement
-TypedDocumentElement.Button -> TypedDocumentElement
-TypedDocumentElement.Iframe -> TypedDocumentElement
-TypedDocumentElement.Blockquote -> TypedDocumentElement
-TypedDocumentElement.Code -> TypedDocumentElement
-TypedDocumentElement.Pre -> TypedDocumentElement
 
 Arche(React {
   createElement: (
@@ -198,11 +197,6 @@ ReactElement(
 ) -> reactElement React.Element
 
 ReactElement(elementType string) -> TypedReactElement
-
-TypedReactElement(props object, text string) -> reactElement React.Element
-TypedReactElement(text string) -> reactElement React.Element
-TypedReactElement(children Array<React.Element|string>) -> reactElement React.Element
-
 ReactElement.A -> TypedReactElement
 ReactElement.P -> TypedReactElement
 ReactElement.B -> TypedReactElement
@@ -242,6 +236,10 @@ ReactElement.Iframe -> TypedReactElement
 ReactElement.Blockquote -> TypedReactElement
 ReactElement.Code -> TypedReactElement
 ReactElement.Pre -> TypedReactElement
+
+TypedReactElement(props object, text string) -> reactElement React.Element
+TypedReactElement(text string) -> reactElement React.Element
+TypedReactElement(children Array<React.Element|string>) -> reactElement React.Element
 ```
 
 ## Using styled
