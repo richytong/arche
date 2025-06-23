@@ -283,7 +283,7 @@ TypedReactElement(children Array<React.Element|string>) -> reactElement React.El
 ```
 
 ## Using styled
-Arche accepts a `styled` option from css-in-js libraries like [Styled Components](https://styled-components.com/) to enable a `css` prop on `ReactElement` and `TypedReactElement`. This does not apply to composite components (those created with `ReactElement(props => {...})` syntax)
+Arche accepts a `styled` option from css-in-js libraries like [Styled Components](https://styled-components.com/) to enable a `css` prop on `ReactElement` and `TypedReactElement`.
 
 ```javascript
 // global.js
