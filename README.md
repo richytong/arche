@@ -95,7 +95,7 @@ import Arche from 'https://unpkg.com/arche/es.js'
 ```
 
 ## Usage
-Set Arche elements globally for a better developer experience.
+Set Arche globally for a better developer experience.
 
 ```javascript
 // global.js
