@@ -174,6 +174,7 @@ DocumentElement.Pre -> TypedDocumentElement
 
 TypedDocumentElement(props object, text string) -> element Element
 TypedDocumentElement(text string) -> element Element
+TypedDocumentElement(props object, children Array<Element|string>) -> element Element
 TypedDocumentElement(children Array<Element|string>) -> element Element
 
 Arche(React {
@@ -239,6 +240,12 @@ ReactElement.Pre -> TypedReactElement
 
 TypedReactElement(props object, text string) -> reactElement React.Element
 TypedReactElement(text string) -> reactElement React.Element
+
+TypedReactElement(
+  props object,
+  children Array<React.Element|string>
+) -> reactElement React.Element
+
 TypedReactElement(children Array<React.Element|string>) -> reactElement React.Element
 ```
 
@@ -307,17 +314,62 @@ ReactElement(
   text string
 ) -> reactElement React.Element
 
+ReactElement(
+  elementType string,
+  propsWithCss? { css: string, ...props object },
+  children Array<React.Element|string>
+) -> reactElement React.Element
+
 ReactElement(elementType string) -> TypedReactElement
+ReactElement.A -> TypedReactElement
+ReactElement.P -> TypedReactElement
+ReactElement.B -> TypedReactElement
+ReactElement.Q -> TypedReactElement
+ReactElement.I -> TypedReactElement
+ReactElement.Ul -> TypedReactElement
+ReactElement.Ol -> TypedReactElement
+ReactElement.Li -> TypedReactElement
+ReactElement.H1 -> TypedReactElement
+ReactElement.H2 -> TypedReactElement
+ReactElement.H3 -> TypedReactElement
+ReactElement.H4 -> TypedReactElement
+ReactElement.H5 -> TypedReactElement
+ReactElement.H6 -> TypedReactElement
+ReactElement.Hr -> TypedReactElement
+ReactElement.Br -> TypedReactElement
+ReactElement.Script -> TypedReactElement
+ReactElement.Html -> TypedReactElement
+ReactElement.Body -> TypedReactElement
+ReactElement.Nav -> TypedReactElement
+ReactElement.Section -> TypedReactElement
+ReactElement.Article -> TypedReactElement
+ReactElement.Footer -> TypedReactElement
+ReactElement.Span -> TypedReactElement
+ReactElement.Div -> TypedReactElement
+ReactElement.Img -> TypedReactElement
+ReactElement.Video -> TypedReactElement
+ReactElement.Form -> TypedReactElement
+ReactElement.Fieldset -> TypedReactElement
+ReactElement.Input -> TypedReactElement
+ReactElement.Label -> TypedReactElement
+ReactElement.Textarea -> TypedReactElement
+ReactElement.Select -> TypedReactElement
+ReactElement.Option -> TypedReactElement
+ReactElement.Button -> TypedReactElement
+ReactElement.Iframe -> TypedReactElement
+ReactElement.Blockquote -> TypedReactElement
+ReactElement.Code -> TypedReactElement
+ReactElement.Pre -> TypedReactElement
+
+TypedReactElement(props object, text string) -> reactElement React.Element
+TypedReactElement(text string) -> reactElement React.Element
 
 TypedReactElement(
-  propsWithCss? { css: string, ...props object },
-  text string
+  props object,
+  children Array<React.Element|string>
 ) -> reactElement React.Element
 
-TypedReactElement(
-  propsWithCss? { css: string, ...props object },
-  children? string|Array<React.Element|string>
-) -> reactElement React.Element
+TypedReactElement(children Array<React.Element|string>) -> reactElement React.Element
 ```
 
 ## Using React Context
