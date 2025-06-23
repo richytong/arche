@@ -448,7 +448,7 @@ Pull requests should provide some basic context and link the relevant issue. Her
 For more information please see [CONTRIBUTING.md](/CONTRIBUTING.md)
 
 # License
-rubico is [MIT Licensed](https://github.com/a-synchronous/rubico/blob/master/LICENSE).
+Arche is [MIT Licensed](https://github.com/a-synchronous/rubico/blob/master/LICENSE).
 
 # Support
  * minimum Node.js version: 14
