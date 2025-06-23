@@ -18,13 +18,11 @@ const isArray = Array.isArray
  *
  * @synopsis
  * ```coffeescript [specscript]
- * Element = Object
- *
- * var element Element,
+ * elementSetAttribute(
+ *   element Element,
  *   key string,
- *   value string|number|Object,
- *
- * elementSetAttribute(element, key, value) -> element
+ *   value string|number|object
+ * ) -> element
  * ```
  */
 const elementSetAttribute = function (element, key, value) {
