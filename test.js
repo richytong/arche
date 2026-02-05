@@ -12,10 +12,10 @@ describe('Arche', () => {
         new TypeError('creator not defined'),
       )
 
-      globalThis.document = { createElement() {} }
+      const document = { createElement() {} }
 
-      const E1 = Arche()
-      assert.equal(E1.creator, globalThis.document)
+      const E1 = Arche(document)
+      assert.equal(E1.creator, document)
     })
 
     const mockEventListeners = new Map()
@@ -61,7 +61,7 @@ describe('Arche', () => {
       }
 
       const el = Div([
-        H1('header'),
+        MockElement('h1', {}, 'header'),
         P({ style: { color: 'grey' } }, 'description'),
         Span({ id: 'hey', excluded: null }),
         Div({ id: 'nested' }, [
