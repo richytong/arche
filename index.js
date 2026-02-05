@@ -397,6 +397,8 @@ function __assignElementNames(CreatorElement) {
   CreatorElement.B = CreatorElement('b')
   CreatorElement.Q = CreatorElement('q')
   CreatorElement.I = CreatorElement('i')
+  CreatorElement.S = CreatorElement('s')
+  CreatorElement.U = CreatorElement('u')
   CreatorElement.Ul = CreatorElement('ul')
   CreatorElement.Ol = CreatorElement('ol')
   CreatorElement.Li = CreatorElement('li')
@@ -411,8 +413,12 @@ function __assignElementNames(CreatorElement) {
   CreatorElement.Br = CreatorElement('br')
 
   CreatorElement.Script = CreatorElement('script')
+  CreatorElement.Style = CreatorElement('style')
+
   CreatorElement.Html = CreatorElement('html')
+  CreatorElement.Main = CreatorElement('main')
   CreatorElement.Body = CreatorElement('body')
+  CreatorElement.Header = CreatorElement('header')
   CreatorElement.Nav = CreatorElement('nav')
   CreatorElement.Section = CreatorElement('section')
   CreatorElement.Article = CreatorElement('article')
@@ -421,6 +427,8 @@ function __assignElementNames(CreatorElement) {
   CreatorElement.Div = CreatorElement('div')
   CreatorElement.Img = CreatorElement('img')
   CreatorElement.Video = CreatorElement('video')
+  CreatorElement.Picture = CreatorElement('picture')
+  CreatorElement.Source = CreatorElement('source')
 
   CreatorElement.Form = CreatorElement('form')
   CreatorElement.Fieldset = CreatorElement('fieldset')
@@ -435,6 +443,17 @@ function __assignElementNames(CreatorElement) {
   CreatorElement.Blockquote = CreatorElement('blockquote')
   CreatorElement.Code = CreatorElement('code')
   CreatorElement.Pre = CreatorElement('pre')
+
+  CreatorElement.Polygon = CreatorElement('polygon')
+  CreatorElement.Svg = CreatorElement('svg')
+  CreatorElement.Path = CreatorElement('path')
+  CreatorElement.Rect = CreatorElement('rect')
+  CreatorElement.Mask = CreatorElement('mask')
+
+  CreatorElement.Dl = CreatorElement('dl')
+  CreatorElement.Dt = CreatorElement('dt')
+  CreatorElement.Dd = CreatorElement('dd')
+
 }
 
 /**
