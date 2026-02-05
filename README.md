@@ -8,7 +8,7 @@
 
 Simplified DOM interface / React in pure JavaScript.
 
-```javascript
+```javascript [playground]
 const DocumentElement = Arche(document)
 const { Div, H1, P } = DocumentElement
 
