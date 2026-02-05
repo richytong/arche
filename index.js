@@ -457,17 +457,249 @@ function __assignElementNames(CreatorElement) {
 }
 
 /**
+ * @name DocumentElement
+ *
+ * @docs
+ * ```coffeescript [specscript]
+ * type DocumentElementChildren = string|Array<string|Element>
+ *
+ * type TypedDocumentElement =
+ *   (props object, children DocumentElementChildren)=>(element Element)
+ *   |(children DocumentElementChildren)=>(element Element)
+ *   |(props object)=>(element Element)
+ *
+ * DocumentElement(elementType string) -> TypedDocumentElement
+ * ```
+ *
+ * The `DocumentElement` constructor returned from `Arche(document)`. Constructs a `TypedDocumentElement` constructor.
+ *
+ * Arguments:
+ *   * `elementType` - the name of the HTML element that the `TypedDocumentElement` constructor will represent.
+ *
+ * Return:
+ *    * `TypedDocumentElement` - a DOM element constructor.
+ *
+ * ```javascript
+ * const DocumentElement = Arche(document)
+ *
+ * const H1 = DocumentElement('h1') // H1 is a DOM element constructor
+ * ```
+ */
+
+/**
+ * @name DocumentElement.{ELEMENT_NAME}
+ *
+ * @docs
+ * ```coffeescript [specscript]
+ * type DocumentElementChildren = string|Array<string|Element>
+ *
+ * type TypedDocumentElement =
+ *   (props object, children DocumentElementChildren)=>(element Element)
+ *   |(children DocumentElementChildren)=>(element Element)
+ *   |(props object)=>(element Element)
+ *
+ * type DocumentElement = (elementType string)=>TypedDocumentElement
+ *
+ * DocumentElement.{ELEMENT_NAME} -> TypedDocumentElement
+ * ```
+ *
+ * The DocumentElement.{ELEMENT_NAME} constructor.
+ *
+ * Arguments:
+ *   * `props` - an object of element properties. These are equivalent to [html attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes).
+ *   * `children` - a string or array of strings and/or [elements](https://developer.mozilla.org/en-US/docs/Web/API/Element). Represents nesting elements in HTML.
+ *
+ * Return:
+ *   * `element` - [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element) - a basic [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) element.
+ *
+ * ```javascript
+ * const DocumentElement = Arche(document)
+ * const my{ELEMENT_NAME} = DocumentElement.{ELEMENT_NAME}({CHILDREN})
+ * document.getElementById('#container').appendChild(my{ELEMENT_NAME})
+ * ```
+ */
+
+/**
+ * @name ReactElement
+ *
+ * @docs
+ * ```coffeescript [specscript]
+ * type React = {
+ *   Element: {
+ *     $$typeof: Symbol,
+ *     props: Object,
+ *     type: any,
+ *   },
+ *   createElement: (
+ *     elementType string,
+ *     props object,
+ *     children string|Array<React.Element|string>
+ *
+ *   )=>(reactElement React.Element),
+ * }
+ *
+ * type ReactElementChildren = string|Array<React.Element>
+ *
+ * type TypedReactElement =
+ *   (props object, children ReactElementChildren)=>(reactElement React.Element)
+ *   |(children ReactElementChildren)=>(reactElement React.Element)
+ *   |(props object)=>(reactElement React.Element)
+ *
+ * type ReactElement =
+ *   ReactFunctionComponent=>(reactElement React.Element)
+ *   |(elementType string)=>TypedReactElement
+ *
+ * ReactElement(fn ReactFunctionComponent) -> reactElement React.Element
+ * ReactElement(elementType string) -> TypedReactElement
+ * ```
+ *
+ * The `ReactElement` constructor returned from `Arche(React)`. Constructs a `TypedReactElement` constructor.
+ *
+ * Arguments:
+ *   * `elementType` - the name of the HTML element that the `TypedReactElement` constructor will represent.
+ *
+ * Return:
+ *    * `TypedReactElement` - a React element constructor.
+ *
+ * ```javascript
+ * const ReactElement = Arche(React)
+ *
+ * const H1 = ReactElement('h1') // H1 is a React element constructor
+ * ```
+ */
+
+/**
+ * @name ReactElement.{ELEMENT_NAME}
+ *
+ * @docs
+ * ```coffeescript [specscript]
+ * type React = {
+ *   Element: {
+ *     $$typeof: Symbol,
+ *     props: Object,
+ *     type: any,
+ *   },
+ *   createElement: (
+ *     elementType string,
+ *     props object,
+ *     children string|Array<React.Element|string>
+ *
+ *   )=>(reactElement React.Element),
+ * }
+ *
+ * type ReactElementChildren = string|Array<React.Element>
+ *
+ * type TypedReactElement =
+ *   (props object, children ReactElementChildren)=>(reactElement React.Element)
+ *   |(children ReactElementChildren)=>(reactElement React.Element)
+ *   |(props object)=>(reactElement React.Element)
+ *
+ * type ReactElement =
+ *   ReactFunctionComponent=>(reactElement React.Element)
+ *   |(elementType string)=>TypedReactElement
+ *
+ * ReactElement.{ELEMENT_NAME} -> TypedReactElement
+ * ```
+ *
+ * The ReactElement.{ELEMENT_NAME} constructor.
+ *
+ * Arguments:
+ *   * `props` - an object of React element properties. These are equivalent to [React props](https://react.dev/learn/passing-props-to-a-component).
+ *   * `children` - a string or array of strings and/or React elements. Represents nesting elements in HTML.
+ *
+ * Return:
+ *   * `reactElement` - a basic React element, `reactElement` is recognized by React and used to render the final React application.
+ *
+ * ```javascript
+ * const ReactElement = Arche(React)
+ * const myReact{ELEMENT_NAME} = ReactElement.{ELEMENT_NAME}({CHILDREN})
+ * ReactDOM.render(myReact{ELEMENT_NAME}, document.getElementById('react-root'))
+ * ```
+ */
+
+/**
  * @name Arche
  *
- * @description
- * See [README](/README.md).
+ * @constructor
+ *
+ * @docs
+ * ```coffeescript [specscript]
+ * type DocumentElementChildren = string|Array<string|Element>
+ *
+ * type TypedDocumentElement =
+ *   (props object, children DocumentElementChildren)=>(element Element)
+ *   |(children DocumentElementChildren)=>(element Element)
+ *   |(props object)=>(element Element)
+ *
+ * type DocumentElement = (elementType string)=>TypedDocumentElement
+ *
+ * type React = {
+ *   Element: {
+ *     $$typeof: Symbol,
+ *     props: Object,
+ *     type: any,
+ *   },
+ *   createElement: (
+ *     elementType string,
+ *     props object,
+ *     children string|Array<React.Element|string>
+ *   )=>(reactElement React.Element),
+ * }
+ *
+ * type ReactElementChildren = string|Array<React.Element>
+ *
+ * type TypedReactElement =
+ *   (props object, children ReactElementChildren)=>(reactElement React.Element)
+ *   |(children ReactElementChildren)=>(reactElement React.Element)
+ *   |(props object)=>(reactElement React.Element)
+ *
+ * type ReactFunctionComponent =
+ *   ({ ...props Object, children ReactElementChildren })=>(reactElement React.Element)
+ *
+ * type ReactElement =
+ *   ReactFunctionComponent=>(reactElement React.Element)
+ *   |(elementType string)=>TypedReactElement
+ *
+ * type StyledComponent = ([css string])=>React.Element
+ *
+ * type styled = Object<[elementName string]: StyledComponent>
+ *
+ * Arche(document Document) -> DocumentElement
+ * Arche(React) -> ReactElement
+ * Arche(React, options { styled }) -> ReactElement
+ * ```
+ *
+ * The Arche class. Simplified DOM interface / React in pure JavaScript.
+ *
+ * Arguments:
+ *   * `document` - [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/Document) - represents any web page loaded in the browser.
+ *   * `React` - the [`React`](https://react.dev/) library.
+ *   * `options`
+ *     * `styled` - the [styled-components](https://styled-components.com/) library.
+ *
+ * Return:
+ *   * `DocumentElement` - a simplified interface for the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+ *   * `ReactElement` - a pure JavaScript interface for React.
+ *
+ * ```javascript
+ * {
+ *   const DocumentElement = Arche(document)
+ *   const H1 = DocumentElement('h1')
+ *   const myH1Element = H1('Title')
+ *   document.getElementById('#container').appendChild(myH1Element)
+ * }
+ *
+ * {
+ *   const ReactElement = Arche(React)
+ *   const H1 = ReactElement('he')
+ *   const myH1ReactElement = H1('Title')
+ *   ReactDOM.render(myH1ReactElement, document.getElementById('react-root'))
+ * }
+ * ```
+ *
  */
 
 const Arche = function (creator, options = {}) {
-  if (creator == null && typeof document != 'undefined') {
-    creator = document
-  }
-
   if (creator == null) {
     throw new TypeError('creator not defined')
   }

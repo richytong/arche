@@ -43,6 +43,10 @@ const UserCard = ReactElement(({
   ReactElement.P({ style: { color: 'lightgrey' } }, `age: ${age}`),
 ]))
 
+console.log(
+  UserCard({ firstName: 'George', lastName: 'Henry', age: 32 }),
+)
+
 ReactDOM.render(
   UserCard({ firstName: 'George', lastName: 'Henry', age: 32 }),
   document.getElementById('user-card')

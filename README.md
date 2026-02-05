@@ -5,12 +5,10 @@
 ![Node.js CI](https://github.com/richytong/arche/actions/workflows/nodejs.yml/badge.svg)
 [![codecov](https://codecov.io/gh/richytong/arche/branch/master/graph/badge.svg)](https://codecov.io/gh/richytong/arche)
 
-HTML as JavaScript. 
+Simplified DOM interface / React in pure JavaScript.
 
 ```javascript
-const DocumentElement = Arche()
-
-// Typed DocumenElements are available as properties of DocumentElement
+const DocumentElement = Arche(document)
 const { Div, H1, P } = DocumentElement
 
 const myElement = Div({ id: 'my-element' }, [
@@ -27,6 +25,22 @@ document.getElementById('#my-container').appendChild(myElement)
 //     <p>lorem ipsum</p>
 //   </div>
 // </div>
+
+const ReactElement = Arche(React)
+const { Div, H1, P, Button, Img } = ReactElement
+
+const UserCard = ReactElement(({
+  firstName, lastName, age,
+}) => Div([
+  H1(`${firstName} ${lastName}`),
+  Img({ src: 'https://via.placeholder.com/150x150', alt: 'placeholder' }),
+  P({ style: { color: 'lightgrey' } }, `age: ${age}`),
+]))
+
+ReactDOM.render(
+  UserCard({ firstName: 'Example', lastName: 'Name', age: 32 }),
+  document.getElementById('react-root')
+)
 ```
 
 ## Installation
@@ -151,9 +165,9 @@ const UserCard = ReactElement(({
   P({ style: { color: 'lightgrey' } }, `age: ${age}`),
 ]))
 
-render(UserCard({ firstName: 'George', lastName: 'Henry', age: 32 }))
+render(UserCard({ firstName: 'Example', lastName: 'Name', age: 32 }))
 // <div>
-//   <h1>George Henry</h1>
+//   <h1>Example Name</h1>
 //   <img src="https://via.placeholder.com/150x150" alt="placeholder">
 //   <p style="color: lightgrey">age: 32</p>
 // </div>
