@@ -4,6 +4,7 @@
 
 ![Node.js CI](https://github.com/richytong/arche/actions/workflows/nodejs.yml/badge.svg)
 [![codecov](https://codecov.io/gh/richytong/arche/branch/master/graph/badge.svg)](https://codecov.io/gh/richytong/arche)
+[![npm version](https://img.shields.io/npm/v/presidium-websocket.svg?style=flat)](https://www.npmjs.com/package/arche)
 
 Simplified DOM interface / React in pure JavaScript.
 
