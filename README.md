@@ -14,7 +14,7 @@ Simplified DOM interface / React in pure JavaScript.
   const { Div, H1, P } = DocumentElement
 
   const myElement = Div({ id: 'my-element' }, [
-    H1('I am a heading'),
+    H1('Heading'),
     P('paragraph'),
     P('lorem ipsum'),
   ])
@@ -30,12 +30,12 @@ Simplified DOM interface / React in pure JavaScript.
     firstName, lastName, age,
   }) => Div([
     H1(`${firstName} ${lastName}`),
-    Img({ src: 'https://via.placeholder.com/150x150', alt: 'placeholder' }),
+    Img({ src: 'https://placehold.co/300x300', alt: 'placeholder' }),
     P({ style: { color: 'lightgrey' } }, `age: ${age}`),
   ]))
 
   ReactDOM.render(
-    UserCard({ firstName: 'Example', lastName: 'Name', age: 32 }),
+    UserCard({ firstName: 'React', lastName: 'Example', age: 32 }),
     document.getElementById('react-root')
   )
 }
