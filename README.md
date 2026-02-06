@@ -35,7 +35,7 @@ Simplified DOM interface / React in pure JavaScript.
   ]))
 
   ReactDOM.render(
-    UserCard({ firstName: 'React', lastName: 'Example', age: 32 }),
+    UserCard({ firstName: 'React', lastName: 'ExampleUser', age: 32 }),
     document.getElementById('react-root')
   )
 }
