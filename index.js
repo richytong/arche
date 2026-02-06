@@ -672,10 +672,10 @@ function __assignElementNames(CreatorElement) {
  * The Arche class. Simplified DOM interface / React in pure JavaScript.
  *
  * Arguments:
- *   * `document` - [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/Document) - represents any web page loaded in the browser.
- *   * `React` - the [`React`](https://react.dev/) library.
+ *   * `document` - [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document) - represents any web page loaded in the browser.
+ *   * `React` - the [React](https://react.dev/) library.
  *   * `options`
- *     * `styled` - the [`styled-components`](https://styled-components.com/) library.
+ *     * `styled` - the [styled-components](https://styled-components.com/) library.
  *
  * Return:
  *   * `DocumentElement` - a simplified interface for the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
