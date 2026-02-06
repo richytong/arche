@@ -514,7 +514,7 @@ function __assignElementNames(CreatorElement) {
  *
  * ```javascript
  * const DocumentElement = Arche(document)
- * const my{ELEMENT_NAME} = DocumentElement.{ELEMENT_NAME}({CHILDREN})
+ * const my{ELEMENT_NAME} = DocumentElement.{ELEMENT_NAME}({EXAMPLE_ARGUMENTS_1})
  * document.getElementById('#container').appendChild(my{ELEMENT_NAME})
  * ```
  */
@@ -612,7 +612,7 @@ function __assignElementNames(CreatorElement) {
  *
  * ```javascript
  * const ReactElement = Arche(React)
- * const myReact{ELEMENT_NAME} = ReactElement.{ELEMENT_NAME}({CHILDREN})
+ * const myReact{ELEMENT_NAME} = ReactElement.{ELEMENT_NAME}({EXAMPLE_ARGUMENTS_1})
  * ReactDOM.render(myReact{ELEMENT_NAME}, document.getElementById('react-root'))
  * ```
  */
