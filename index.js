@@ -513,7 +513,6 @@ function __assignElementNames(CreatorElement) {
  *   * `element` - [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element) - a basic [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) element.
  *
  * ```javascript
- * const DocumentElement = Arche(document)
  * const my{ELEMENT_NAME} = DocumentElement.{ELEMENT_NAME}({EXAMPLE_ARGUMENTS_1})
  * document.getElementById('#container').appendChild(my{ELEMENT_NAME})
  * ```
@@ -611,7 +610,6 @@ function __assignElementNames(CreatorElement) {
  *   * `reactElement` - a basic React element, `reactElement` is recognized by React and used to render the final React application.
  *
  * ```javascript
- * const ReactElement = Arche(React)
  * const myReact{ELEMENT_NAME} = ReactElement.{ELEMENT_NAME}({EXAMPLE_ARGUMENTS_1})
  * ReactDOM.render(myReact{ELEMENT_NAME}, document.getElementById('react-root'))
  * ```
@@ -681,18 +679,18 @@ function __assignElementNames(CreatorElement) {
  *   * `DocumentElement` - a simplified interface for the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
  *   * `ReactElement` - a pure JavaScript interface for React.
  *
- * ```javascript
+ * ```javascript [playground]
  * {
  *   const DocumentElement = Arche(document)
  *   const H1 = DocumentElement('h1')
- *   const myH1Element = H1('Title')
- *   document.getElementById('#container').appendChild(myH1Element)
+ *   const myH1Element = H1('DOM Title')
+ *   document.getElementById('dom-container').appendChild(myH1Element)
  * }
  *
  * {
  *   const ReactElement = Arche(React)
- *   const H1 = ReactElement('he')
- *   const myH1ReactElement = H1('Title')
+ *   const H1 = ReactElement('h1')
+ *   const myH1ReactElement = H1('React Title')
  *   ReactDOM.render(myH1ReactElement, document.getElementById('react-root'))
  * }
  * ```
