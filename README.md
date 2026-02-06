@@ -14,7 +14,7 @@ Simplified DOM interface / React in pure JavaScript.
   const { Div, H1, P } = DocumentElement
 
   const myElement = Div({ id: 'my-element' }, [
-    H1('Heading'),
+    H1('DOM Example'),
     P('paragraph'),
     P('lorem ipsum'),
   ])
