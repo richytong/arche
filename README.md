@@ -211,7 +211,7 @@ Your feedback and contributions are welcome. If you have a suggestion, please ra
 
 Pull requests should provide some basic context and link the relevant issue. If you are interested in contributing, the [help wanted](https://github.com/richytong/arche/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) tag is a good place to start.
 
-For more information please see [CONTRIBUTING.md](/CONTRIBUTING.md)
+For more information please see [CONTRIBUTING.md](https://github.com/richytong/arche/blob/master/CONTRIBUTING.md)
 
 # License
 Arche is [MIT Licensed](https://github.com/a-synchronous/rubico/blob/master/LICENSE).
