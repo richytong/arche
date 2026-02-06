@@ -19,7 +19,7 @@ Simplified DOM interface / React in pure JavaScript.
     P('lorem ipsum'),
   ])
 
-  document.getElementById('#dom-container').appendChild(myElement)
+  document.getElementById('dom-container').appendChild(myElement)
 }
 
 {
