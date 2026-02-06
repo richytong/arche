@@ -77,70 +77,6 @@ window.Svg = DocumentElement('svg')
 window.Path = DocumentElement('path')
 ```
 
-## Syntax
-```coffeescript [specscript]
-Arche() -> DocumentElement
-Arche(document Document) -> DocumentElement
-
-DocumentElement(
-  elementType string,
-  props object,
-  text string
-) -> element Element
-
-DocumentElement(
-  elementType string,
-  props object,
-  children Array<Element|string>
-) -> element Element
-
-DocumentElement(elementType string) -> TypedDocumentElement
-DocumentElement.A -> TypedDocumentElement
-DocumentElement.P -> TypedDocumentElement
-DocumentElement.B -> TypedDocumentElement
-DocumentElement.Q -> TypedDocumentElement
-DocumentElement.I -> TypedDocumentElement
-DocumentElement.Ul -> TypedDocumentElement
-DocumentElement.Ol -> TypedDocumentElement
-DocumentElement.Li -> TypedDocumentElement
-DocumentElement.H1 -> TypedDocumentElement
-DocumentElement.H2 -> TypedDocumentElement
-DocumentElement.H3 -> TypedDocumentElement
-DocumentElement.H4 -> TypedDocumentElement
-DocumentElement.H5 -> TypedDocumentElement
-DocumentElement.H6 -> TypedDocumentElement
-DocumentElement.Hr -> TypedDocumentElement
-DocumentElement.Br -> TypedDocumentElement
-DocumentElement.Script -> TypedDocumentElement
-DocumentElement.Html -> TypedDocumentElement
-DocumentElement.Body -> TypedDocumentElement
-DocumentElement.Nav -> TypedDocumentElement
-DocumentElement.Section -> TypedDocumentElement
-DocumentElement.Article -> TypedDocumentElement
-DocumentElement.Footer -> TypedDocumentElement
-DocumentElement.Span -> TypedDocumentElement
-DocumentElement.Div -> TypedDocumentElement
-DocumentElement.Img -> TypedDocumentElement
-DocumentElement.Video -> TypedDocumentElement
-DocumentElement.Form -> TypedDocumentElement
-DocumentElement.Fieldset -> TypedDocumentElement
-DocumentElement.Input -> TypedDocumentElement
-DocumentElement.Label -> TypedDocumentElement
-DocumentElement.Textarea -> TypedDocumentElement
-DocumentElement.Select -> TypedDocumentElement
-DocumentElement.Option -> TypedDocumentElement
-DocumentElement.Button -> TypedDocumentElement
-DocumentElement.Iframe -> TypedDocumentElement
-DocumentElement.Blockquote -> TypedDocumentElement
-DocumentElement.Code -> TypedDocumentElement
-DocumentElement.Pre -> TypedDocumentElement
-
-TypedDocumentElement(props object, text string) -> element Element
-TypedDocumentElement(text string) -> element Element
-TypedDocumentElement(props object, children Array<Element|string>) -> element Element
-TypedDocumentElement(children Array<Element|string>) -> element Element
-```
-
 ## Using React
 To use Arche with [React](https://react.dev/), simply provide the React library.
 
@@ -150,7 +86,7 @@ const ReactElement = Arche(React)
 
 Create dynamic components with props.
 
-```javascript
+```javascript [playground]
 const ReactElement = Arche(React)
 
 const { Div, H1, P, Button, Img } = ReactElement
@@ -159,21 +95,19 @@ const UserCard = ReactElement(({
   firstName, lastName, age,
 }) => Div([
   H1(`${firstName} ${lastName}`),
-  Img({ src: 'https://via.placeholder.com/150x150', alt: 'placeholder' }),
+  Img({ src: 'https://placehold.co/300x300', alt: 'placeholder' }),
   P({ style: { color: 'lightgrey' } }, `age: ${age}`),
 ]))
 
-render(UserCard({ firstName: 'Example', lastName: 'Name', age: 32 }))
-// <div>
-//   <h1>Example Name</h1>
-//   <img src="https://via.placeholder.com/150x150" alt="placeholder">
-//   <p style="color: lightgrey">age: 32</p>
-// </div>
+ReactDOM.render(
+  UserCard({ firstName: 'Example', lastName: 'Name', age: 32 }),
+  document.getElementById('react-root')
+)
 ```
 
 Complete interoperability with React hooks (converted from [this example](https://reactjs.org/docs/hooks-intro.html)).
 
-```javascript
+```javascript [playground]
 const ReactElement = Arche(React)
 const { Div, P, Button } = ReactElement
 const { useState } = React
@@ -191,11 +125,7 @@ const Example = ReactElement(() => {
   ])
 })
 
-render(Example())
-// <div>
-//   <p>You clicked {count} times</p>
-//   <button onclick="setCount(count + 1)">Click me</button>
-// </div>
+ReactDOM.render(Example(), document.getElementById('react-root'))
 ```
 
 Set `ReactElement` globally for a better developer experience.
@@ -214,83 +144,6 @@ for (const elementName in ReactElement) {
 window.Aside = ReactElement('aside')
 window.Svg = ReactElement('svg')
 window.Path = ReactElement('path')
-```
-
-## Syntax with React
-
-```coffeescript [specscript]
-type React = {
-  createElement: (
-    elementType string,
-    props object,
-    children string|Array<React.Element|string>
-  )=>(reactElement React.Element)
-}
-
-Arche(React) -> ReactElement
-
-ReactElement(
-  elementType string,
-  props object,
-  text string
-) -> reactElement React.Element
-
-ReactElement(
-  elementType string,
-  props object,
-  children Array<React.Element|string>
-) -> reactElement React.Element
-
-ReactElement(elementType string) -> TypedReactElement
-ReactElement.A -> TypedReactElement
-ReactElement.P -> TypedReactElement
-ReactElement.B -> TypedReactElement
-ReactElement.Q -> TypedReactElement
-ReactElement.I -> TypedReactElement
-ReactElement.Ul -> TypedReactElement
-ReactElement.Ol -> TypedReactElement
-ReactElement.Li -> TypedReactElement
-ReactElement.H1 -> TypedReactElement
-ReactElement.H2 -> TypedReactElement
-ReactElement.H3 -> TypedReactElement
-ReactElement.H4 -> TypedReactElement
-ReactElement.H5 -> TypedReactElement
-ReactElement.H6 -> TypedReactElement
-ReactElement.Hr -> TypedReactElement
-ReactElement.Br -> TypedReactElement
-ReactElement.Script -> TypedReactElement
-ReactElement.Html -> TypedReactElement
-ReactElement.Body -> TypedReactElement
-ReactElement.Nav -> TypedReactElement
-ReactElement.Section -> TypedReactElement
-ReactElement.Article -> TypedReactElement
-ReactElement.Footer -> TypedReactElement
-ReactElement.Span -> TypedReactElement
-ReactElement.Div -> TypedReactElement
-ReactElement.Img -> TypedReactElement
-ReactElement.Video -> TypedReactElement
-ReactElement.Form -> TypedReactElement
-ReactElement.Fieldset -> TypedReactElement
-ReactElement.Input -> TypedReactElement
-ReactElement.Label -> TypedReactElement
-ReactElement.Textarea -> TypedReactElement
-ReactElement.Select -> TypedReactElement
-ReactElement.Option -> TypedReactElement
-ReactElement.Button -> TypedReactElement
-ReactElement.Iframe -> TypedReactElement
-ReactElement.Blockquote -> TypedReactElement
-ReactElement.Code -> TypedReactElement
-ReactElement.Pre -> TypedReactElement
-
-TypedReactElement(props object, text string) -> reactElement React.Element
-TypedReactElement(text string) -> reactElement React.Element
-
-TypedReactElement(
-  props object,
-  children Array<React.Element|string>
-) -> reactElement React.Element
-
-TypedReactElement(children Array<React.Element|string>) -> reactElement React.Element
 ```
 
 ## Using React Context
@@ -328,127 +181,29 @@ const ArticleWrapper = ReactElement(() => {
 Arche accepts a `styled` option from css-in-js libraries like [Styled Components](https://styled-components.com/) to enable a `css` prop on `ReactElement` and `TypedReactElement`.
 
 ```javascript
-// global.js
 const ReactElement = Arche(React, { styled })
 ```
 
 Elements can now specify a `css` prop to use css-in-js.
 
-```javascript
-// MyComponent.js
-const MyComponent = ReactElement(props => {
+```javascript [playground]
+const ReactElement = Arche(React, { styled })
+const { Div, H1, P } = ReactElement
+
+const MyComponent = ReactElement(() => {
   return Div({
     css: `
-      width: 500px;
+      height: 500px;
+      width: 100%;
       background-color: pink;
     `,
-  })
+  }, [
+    H1('Styled Example'),
+    P('Text'),
+  ])
 })
-```
 
-## Syntax with styled
-```coffeescript [specscript]
-([css string])=>(reactElement React.Element) -> StyledComponent
-
-type Styled = {
-  h1: StyledComponent,
-  h2: StyledComponent,
-  h3: StyledComponent,
-  h4: StyledComponent,
-  h5: StyledComponent,
-  div: StyledComponent,
-  button: StyledComponent,
-  a: StyledComponent,
-  p: StyledComponent,
-  span: StyledComponent,
-  img: StyledComponent,
-  ul: StyledComponent,
-  ol: StyledComponent,
-  li: StyledComponent,
-  form: StyledComponent,
-  article: StyledComponent,
-  main: StyledComponent,
-  section: StyledComponent,
-  nav: StyledComponent,
-}
-
-Arche(React {
-  createElement: (
-    elementType string,
-    props object,
-    textOrChildren string|Array<React.Element|string>
-  )=>(reactElement React.Element)
-}, options {
-  styled: Styled,
-  styledMemoizationCap?: number
-}) -> reactElement ReactElement
-
-ReactElement(
-  elementType string,
-  propsWithCss { css: string, ...props object },
-  text string
-) -> reactElement React.Element
-
-ReactElement(
-  elementType string,
-  propsWithCss { css: string, ...props object },
-  children Array<React.Element|string>
-) -> reactElement React.Element
-
-ReactElement(elementType string) -> TypedReactElement
-ReactElement.A -> TypedReactElement
-ReactElement.P -> TypedReactElement
-ReactElement.B -> TypedReactElement
-ReactElement.Q -> TypedReactElement
-ReactElement.I -> TypedReactElement
-ReactElement.Ul -> TypedReactElement
-ReactElement.Ol -> TypedReactElement
-ReactElement.Li -> TypedReactElement
-ReactElement.H1 -> TypedReactElement
-ReactElement.H2 -> TypedReactElement
-ReactElement.H3 -> TypedReactElement
-ReactElement.H4 -> TypedReactElement
-ReactElement.H5 -> TypedReactElement
-ReactElement.H6 -> TypedReactElement
-ReactElement.Hr -> TypedReactElement
-ReactElement.Br -> TypedReactElement
-ReactElement.Script -> TypedReactElement
-ReactElement.Html -> TypedReactElement
-ReactElement.Body -> TypedReactElement
-ReactElement.Nav -> TypedReactElement
-ReactElement.Section -> TypedReactElement
-ReactElement.Article -> TypedReactElement
-ReactElement.Footer -> TypedReactElement
-ReactElement.Span -> TypedReactElement
-ReactElement.Div -> TypedReactElement
-ReactElement.Img -> TypedReactElement
-ReactElement.Video -> TypedReactElement
-ReactElement.Form -> TypedReactElement
-ReactElement.Fieldset -> TypedReactElement
-ReactElement.Input -> TypedReactElement
-ReactElement.Label -> TypedReactElement
-ReactElement.Textarea -> TypedReactElement
-ReactElement.Select -> TypedReactElement
-ReactElement.Option -> TypedReactElement
-ReactElement.Button -> TypedReactElement
-ReactElement.Iframe -> TypedReactElement
-ReactElement.Blockquote -> TypedReactElement
-ReactElement.Code -> TypedReactElement
-ReactElement.Pre -> TypedReactElement
-
-TypedReactElement(
-  propsWithCss { css: string, ...props object },
-  text string
-) -> reactElement React.Element
-
-TypedReactElement(text string) -> reactElement React.Element
-
-TypedReactElement(
-  propsWithCss { css: string, ...props object },
-  children Array<React.Element|string>
-) -> reactElement React.Element
-
-TypedReactElement(children Array<React.Element|string>) -> reactElement React.Element
+ReactDOM.render(MyComponent(), document.getElementById('react-root'))
 ```
 
 # Contributing
