@@ -9,39 +9,36 @@
 Simplified DOM interface / React in pure JavaScript.
 
 ```javascript [playground]
-const DocumentElement = Arche(document)
-const { Div, H1, P } = DocumentElement
+{
+  const DocumentElement = Arche(document)
+  const { Div, H1, P } = DocumentElement
 
-const myElement = Div({ id: 'my-element' }, [
-  H1('I am a heading'),
-  P('paragraph'),
-  P('lorem ipsum'),
-])
+  const myElement = Div({ id: 'my-element' }, [
+    H1('I am a heading'),
+    P('paragraph'),
+    P('lorem ipsum'),
+  ])
 
-document.getElementById('#my-container').appendChild(myElement)
-// <div id="my-container">
-//   <div id="my-element">
-//     <h1>I am a heading</h1>
-//     <p>paragraph</p>
-//     <p>lorem ipsum</p>
-//   </div>
-// </div>
+  document.getElementById('#dom-container').appendChild(myElement)
+}
 
-const ReactElement = Arche(React)
-const { Div, H1, P, Button, Img } = ReactElement
+{
+  const ReactElement = Arche(React)
+  const { Div, H1, P, Button, Img } = ReactElement
 
-const UserCard = ReactElement(({
-  firstName, lastName, age,
-}) => Div([
-  H1(`${firstName} ${lastName}`),
-  Img({ src: 'https://via.placeholder.com/150x150', alt: 'placeholder' }),
-  P({ style: { color: 'lightgrey' } }, `age: ${age}`),
-]))
+  const UserCard = ReactElement(({
+    firstName, lastName, age,
+  }) => Div([
+    H1(`${firstName} ${lastName}`),
+    Img({ src: 'https://via.placeholder.com/150x150', alt: 'placeholder' }),
+    P({ style: { color: 'lightgrey' } }, `age: ${age}`),
+  ]))
 
-ReactDOM.render(
-  UserCard({ firstName: 'Example', lastName: 'Name', age: 32 }),
-  document.getElementById('react-root')
-)
+  ReactDOM.render(
+    UserCard({ firstName: 'Example', lastName: 'Name', age: 32 }),
+    document.getElementById('react-root')
+  )
+}
 ```
 
 ## Installation
