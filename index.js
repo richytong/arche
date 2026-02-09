@@ -516,6 +516,9 @@ function __assignElementNames(CreatorElement) {
  * const my{ELEMENT_NAME} = DocumentElement.{ELEMENT_NAME}({EXAMPLE_ARGUMENTS_1})
  * document.getElementById('#container').appendChild(my{ELEMENT_NAME})
  * ```
+ *
+ * References:
+ *   * [DocumentElement](/docs/DocumentElement)
  */
 
 /**
@@ -613,6 +616,9 @@ function __assignElementNames(CreatorElement) {
  * const myReact{ELEMENT_NAME} = ReactElement.{ELEMENT_NAME}({EXAMPLE_ARGUMENTS_1})
  * ReactDOM.render(myReact{ELEMENT_NAME}, document.getElementById('react-root'))
  * ```
+ *
+ * References:
+ *   * [ReactElement](/docs/ReactElement)
  */
 
 /**
