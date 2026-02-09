@@ -12,13 +12,11 @@ const isArray = Array.isArray
  *
  * @synopsis
  * ```coffeescript [specscript]
- * Element = Object
- *
- * var element Element,
+ * elementSetAttribute(
+ *   element Element,
  *   key string,
- *   value string|number|Object,
- *
- * elementSetAttribute(element, key, value) -> element
+ *   value string|number|object
+ * ) -> element
  * ```
  */
 const elementSetAttribute = function (element, key, value) {
@@ -91,7 +89,7 @@ const memoizeCappedWithResolver = function (func, cap, resolver) {
  *     elementType string,
  *     props? object,
  *     children? Array<creator.Element>
- *   )=>creator.Element
+ *   )=>(creatorElement creator.Element)
  * }
  *
  * creatorCreateElement(
@@ -99,7 +97,7 @@ const memoizeCappedWithResolver = function (func, cap, resolver) {
  *   elementType string|function,
  *   propsOrTextOrChildren object|string|Array,
  *   textOrChildren string|Array,
- * ) -> creator.Element
+ * ) -> creatorElement creator.Element
  * ```
  */
 function creatorCreateElement(
@@ -144,13 +142,12 @@ function creatorCreateElement(
  *       elementType string,
  *       props? object,
  *       children? Array<creator.Element>
- *     )=>creator.Element
+ *     )=>(creatorElement creator.Element)
  *   },
  *   elementType string,
  *   propsOrTextOrChildren object|string|Array,
  *   textOrChildren string|Array,
- * )
- *   -> creator.Element
+ * ) -> creatorElement creator.Element
  * ```
  */
 function CreatorElement(
@@ -214,15 +211,15 @@ function CreatorElement(
  *     elementType string,
  *     props? object,
  *     children? Array<creator.Element>
- *   )=>creator.Element
+ *   )=>(creatorElement creator.Element)
  * }
  *
- * __CreatorElement(creator elementType string) -> _Element function
+ * __CreatorElement(creator elementType string) -> _Element
  *
  * _Element(
  *   propsOrTextOrChildren object|string|Array,
  *   textOrChildren string|Array,
- * ) -> creator.Element
+ * ) -> creatorElement creator.Element
  * ```
  */
 function __CreatorElement(creator, elementType) {
@@ -248,10 +245,11 @@ function __CreatorElement(creator, elementType) {
  *     elementType string,
  *     props? object,
  *     children? Array<creator.Element>
- *   )=>creator.Element
+ *   )=>(creatorElement creator.Element)
  * }
  *
- * _CreatorElement(creator) -> _Element (...args)=>creator.Element
+ * _CreatorElement(creator) -> _Element
+ * _Element(...args) -> creatorElement creator.Element
  * ```
  */
 function _CreatorElement(creator) {
@@ -273,7 +271,7 @@ function _CreatorElement(creator) {
  *     elementType string,
  *     props? object,
  *     children? Array<creator.Element>
- *   )=>creator.Element
+ *   )=>(creatorElement creator.Element)
  * }
  *
  * $__StyledCreatorElement(
@@ -282,14 +280,14 @@ function _CreatorElement(creator) {
  *     styled Styled,
  *     styledMemoizationCap number,
  *   }
- * ) -> _StyledCreatorElement function
+ * ) -> _StyledCreatorElement
  *
- * _StyledCreatorElement(elementType string) -> _StyledElement function
+ * _StyledCreatorElement(elementType string) -> _StyledElement
  *
  * _StyledElement(
  *   propsOrTextOrChildren object|string|Array,
  *   textOrChildren string|Array,
- * ) -> creator.Element
+ * ) -> creatorElement creator.Element
  * ```
  */
 function $__StyledCreatorElement(creator, options) {
@@ -381,7 +379,7 @@ function $__StyledCreatorElement(creator, options) {
  *     elementType string,
  *     props? object,
  *     children? Array<creator.Element>
- *   )=>creator.Element
+ *   )=>(creatorElement creator.Element)
  * }
  *
  * __assignElementNames(CreatorElement creator.Element) -> ()
@@ -393,6 +391,8 @@ function __assignElementNames(CreatorElement) {
   CreatorElement.B = CreatorElement('b')
   CreatorElement.Q = CreatorElement('q')
   CreatorElement.I = CreatorElement('i')
+  CreatorElement.S = CreatorElement('s')
+  CreatorElement.U = CreatorElement('u')
   CreatorElement.Ul = CreatorElement('ul')
   CreatorElement.Ol = CreatorElement('ol')
   CreatorElement.Li = CreatorElement('li')
@@ -407,8 +407,12 @@ function __assignElementNames(CreatorElement) {
   CreatorElement.Br = CreatorElement('br')
 
   CreatorElement.Script = CreatorElement('script')
+  CreatorElement.Style = CreatorElement('style')
+
   CreatorElement.Html = CreatorElement('html')
+  CreatorElement.Main = CreatorElement('main')
   CreatorElement.Body = CreatorElement('body')
+  CreatorElement.Header = CreatorElement('header')
   CreatorElement.Nav = CreatorElement('nav')
   CreatorElement.Section = CreatorElement('section')
   CreatorElement.Article = CreatorElement('article')
@@ -417,6 +421,8 @@ function __assignElementNames(CreatorElement) {
   CreatorElement.Div = CreatorElement('div')
   CreatorElement.Img = CreatorElement('img')
   CreatorElement.Video = CreatorElement('video')
+  CreatorElement.Picture = CreatorElement('picture')
+  CreatorElement.Source = CreatorElement('source')
 
   CreatorElement.Form = CreatorElement('form')
   CreatorElement.Fieldset = CreatorElement('fieldset')
@@ -431,133 +437,267 @@ function __assignElementNames(CreatorElement) {
   CreatorElement.Blockquote = CreatorElement('blockquote')
   CreatorElement.Code = CreatorElement('code')
   CreatorElement.Pre = CreatorElement('pre')
+
+  CreatorElement.Polygon = CreatorElement('polygon')
+  CreatorElement.Svg = CreatorElement('svg')
+  CreatorElement.Path = CreatorElement('path')
+  CreatorElement.Rect = CreatorElement('rect')
+  CreatorElement.Mask = CreatorElement('mask')
+
+  CreatorElement.Dl = CreatorElement('dl')
+  CreatorElement.Dt = CreatorElement('dt')
+  CreatorElement.Dd = CreatorElement('dd')
+
 }
+
+/**
+ * @name DocumentElement
+ *
+ * @docs
+ * ```coffeescript [specscript]
+ * type DocumentElementChildren = string|Array<string|Element>
+ *
+ * type TypedDocumentElement =
+ *   (props object, children DocumentElementChildren)=>(element Element)
+ *   |(children DocumentElementChildren)=>(element Element)
+ *   |(props object)=>(element Element)
+ *
+ * DocumentElement(elementType string) -> TypedDocumentElement
+ * ```
+ *
+ * The `DocumentElement` constructor returned from `Arche(document)`. Constructs a `TypedDocumentElement` constructor.
+ *
+ * Arguments:
+ *   * `elementType` - the name of the HTML element that the `TypedDocumentElement` constructor will represent.
+ *
+ * Return:
+ *    * `TypedDocumentElement` - a DOM element constructor.
+ *
+ * ```javascript
+ * const DocumentElement = Arche(document)
+ *
+ * const H1 = DocumentElement('h1') // H1 is a DOM element constructor
+ * ```
+ */
+
+/**
+ * @name DocumentElement.{ELEMENT_NAME}
+ *
+ * @docs
+ * ```coffeescript [specscript]
+ * type DocumentElementChildren = string|Array<string|Element>
+ *
+ * type TypedDocumentElement =
+ *   (props object, children DocumentElementChildren)=>(element Element)
+ *   |(children DocumentElementChildren)=>(element Element)
+ *   |(props object)=>(element Element)
+ *
+ * type DocumentElement = (elementType string)=>TypedDocumentElement
+ *
+ * DocumentElement.{ELEMENT_NAME} -> TypedDocumentElement
+ * ```
+ *
+ * The DocumentElement.{ELEMENT_NAME} constructor.
+ *
+ * Arguments:
+ *   * `props` - an object of element properties. These are equivalent to [html attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes).
+ *   * `children` - a string or array of strings and/or [elements](https://developer.mozilla.org/en-US/docs/Web/API/Element). Represents nesting elements in HTML.
+ *
+ * Return:
+ *   * `element` - [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element) - a basic [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) element.
+ *
+ * ```javascript
+ * const my{ELEMENT_NAME} = DocumentElement.{ELEMENT_NAME}({EXAMPLE_ARGUMENTS_1})
+ * document.getElementById('#container').appendChild(my{ELEMENT_NAME})
+ * ```
+ *
+ * References:
+ *   * [DocumentElement](/docs/DocumentElement)
+ */
+
+/**
+ * @name ReactElement
+ *
+ * @docs
+ * ```coffeescript [specscript]
+ * type React = {
+ *   Element: {
+ *     $$typeof: Symbol,
+ *     props: Object,
+ *     type: any,
+ *   },
+ *   createElement: (
+ *     elementType string,
+ *     props object,
+ *     children string|Array<React.Element|string>
+ *
+ *   )=>(reactElement React.Element),
+ * }
+ *
+ * type ReactElementChildren = string|Array<React.Element>
+ *
+ * type TypedReactElement =
+ *   (props object, children ReactElementChildren)=>(reactElement React.Element)
+ *   |(children ReactElementChildren)=>(reactElement React.Element)
+ *   |(props object)=>(reactElement React.Element)
+ *
+ * type ReactElement =
+ *   ReactFunctionComponent=>(reactElement React.Element)
+ *   |(elementType string)=>TypedReactElement
+ *
+ * ReactElement(fn ReactFunctionComponent) -> reactElement React.Element
+ * ReactElement(elementType string) -> TypedReactElement
+ * ```
+ *
+ * The `ReactElement` constructor returned from `Arche(React)`. Constructs a `TypedReactElement` constructor.
+ *
+ * Arguments:
+ *   * `elementType` - the name of the HTML element that the `TypedReactElement` constructor will represent.
+ *
+ * Return:
+ *    * `TypedReactElement` - a React element constructor.
+ *
+ * ```javascript
+ * const ReactElement = Arche(React)
+ *
+ * const H1 = ReactElement('h1') // H1 is a React element constructor
+ * ```
+ */
+
+/**
+ * @name ReactElement.{ELEMENT_NAME}
+ *
+ * @docs
+ * ```coffeescript [specscript]
+ * type React = {
+ *   Element: {
+ *     $$typeof: Symbol,
+ *     props: Object,
+ *     type: any,
+ *   },
+ *   createElement: (
+ *     elementType string,
+ *     props object,
+ *     children string|Array<React.Element|string>
+ *
+ *   )=>(reactElement React.Element),
+ * }
+ *
+ * type ReactElementChildren = string|Array<React.Element>
+ *
+ * type TypedReactElement =
+ *   (props object, children ReactElementChildren)=>(reactElement React.Element)
+ *   |(children ReactElementChildren)=>(reactElement React.Element)
+ *   |(props object)=>(reactElement React.Element)
+ *
+ * type ReactElement =
+ *   ReactFunctionComponent=>(reactElement React.Element)
+ *   |(elementType string)=>TypedReactElement
+ *
+ * ReactElement.{ELEMENT_NAME} -> TypedReactElement
+ * ```
+ *
+ * The ReactElement.{ELEMENT_NAME} constructor.
+ *
+ * Arguments:
+ *   * `props` - an object of React element properties. These are equivalent to [React props](https://react.dev/learn/passing-props-to-a-component).
+ *   * `children` - a string or array of strings and/or React elements. Represents nesting elements in HTML.
+ *
+ * Return:
+ *   * `reactElement` - a basic React element, `reactElement` is recognized by React and used to render the final React application.
+ *
+ * ```javascript
+ * const myReact{ELEMENT_NAME} = ReactElement.{ELEMENT_NAME}({EXAMPLE_ARGUMENTS_1})
+ * ReactDOM.render(myReact{ELEMENT_NAME}, document.getElementById('react-root'))
+ * ```
+ *
+ * References:
+ *   * [ReactElement](/docs/ReactElement)
+ */
 
 /**
  * @name Arche
  *
- * @synopsis
+ * @constructor
+ *
+ * @docs
  * ```coffeescript [specscript]
- * Element = Object
+ * type DocumentElementChildren = string|Array<string|Element>
  *
- * type string|function
- * props Object
- * children string|Object|Array<string|Object>
- * element Element
- * creator {
- *   createElement: (type, props?, children?)=>element,
- * }
- * rootElement type=>((props, children?)|children)=>element {
- *   Script: ((props, children?)|children)=>element,
- *   Html: ((props, children?)|children)=>element,
- *   Body: (props, children?)|children)=>element,
- *   Section: (props, children?)|children)=>element,
- *   Article: (props, children?)|children)=>element,
- *   Span: (props, children?)|children)=>element,
- *   Div: (props, children?)|children)=>element,
- *   Img: (props, children?)|children)=>element,
- *   H1: (props, children?)|children)=>element,
- *   H2: (props, children?)|children)=>element,
- *   H3: (props, children?)|children)=>element,
- *   H4: (props, children?)|children)=>element,
- *   H5: (props, children?)|children)=>element,
- *   H6: (props, children?)|children)=>element,
+ * type TypedDocumentElement =
+ *   (props object, children DocumentElementChildren)=>(element Element)
+ *   |(children DocumentElementChildren)=>(element Element)
+ *   |(props object)=>(element Element)
  *
- *   A: (props, children?)|children)=>element,
- *   P: (props, children?)|children)=>element,
- *   B: (props, children?)|children)=>element,
- *   Q: (props, children?)|children)=>element,
- *   I: (props, children?)|children)=>element,
- *   Ul: (props, children?)|children)=>element,
- *   Ol: (props, children?)|children)=>element,
- *   Li: (props, children?)|children)=>element,
- *   Textarea: (props, children?)|children)=>element,
- *   Button: (props, children?)|children)=>element,
- *   Iframe: (props, children?)|children)=>element,
- *   Blockquote: (props, children?)|children)=>element,
- *   Br: (props, children?)|children)=>element,
- *   Code: (props, children?)|children)=>element,
- *   Pre: (props, children?)|children)=>element,
+ * type DocumentElement = (elementType string)=>TypedDocumentElement
+ *
+ * type React = {
+ *   Element: {
+ *     $$typeof: Symbol,
+ *     props: Object,
+ *     type: any,
+ *   },
+ *   createElement: (
+ *     elementType string,
+ *     props object,
+ *     children string|Array<React.Element|string>
+ *   )=>(reactElement React.Element),
  * }
  *
- * Arche(creator, options {
- *   styled?: Styled,
- *   styledMemoizationCap?: number,
- * }) -> rootElement
+ * type ReactElementChildren = string|Array<React.Element>
+ *
+ * type TypedReactElement =
+ *   (props object, children ReactElementChildren)=>(reactElement React.Element)
+ *   |(children ReactElementChildren)=>(reactElement React.Element)
+ *   |(props object)=>(reactElement React.Element)
+ *
+ * type ReactFunctionComponent =
+ *   ({ ...props Object, children ReactElementChildren })=>(reactElement React.Element)
+ *
+ * type ReactElement =
+ *   ReactFunctionComponent=>(reactElement React.Element)
+ *   |(elementType string)=>TypedReactElement
+ *
+ * type StyledComponent = ([css string])=>React.Element
+ *
+ * type styled = Object<[elementName string]: StyledComponent>
+ *
+ * Arche(document Document) -> DocumentElement
+ * Arche(React) -> ReactElement
+ * Arche(React, options { styled }) -> ReactElement
  * ```
  *
- * @description
- * > Arche (/ˈɑːrki/; Ancient Greek: ἀρχή) is a Greek word with primary senses "beginning", "origin" or "source of action" (ἐξ' ἀρχῆς: from the beginning, οr ἐξ' ἀρχῆς λόγος: the original argument), and later "first principle" or "element". ([wikipedia](https://en.wikipedia.org/wiki/Arche))
+ * The Arche class. Simplified DOM interface / React in pure JavaScript.
  *
- * HTML as JavaScript.
+ * Arguments:
+ *   * `document` - [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document) - represents any web page loaded in the browser.
+ *   * `React` - the [React](https://react.dev/) library.
+ *   * `options`
+ *     * `styled` - the [styled-components](https://styled-components.com/) library.
+ *
+ * Return:
+ *   * `DocumentElement` - a simplified interface for the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
+ *   * `ReactElement` - a pure JavaScript interface for React.
  *
  * ```javascript [playground]
- * const ReactElement = Arche(React)
- * // supply the React library
+ * {
+ *   const DocumentElement = Arche(document)
+ *   const H1 = DocumentElement('h1')
+ *   const myH1Element = H1('DOM Title')
+ *   document.getElementById('dom-container').appendChild(myH1Element)
+ * }
  *
- * const { Div, H1, P } = ReactElement
- * // some common building blocks are provided on ReactElement
- * // as property functions.
- *
- * const myElement = Div([
- *   H1('I am a heading'),
- *   P('heyo'),
- *   P('lorem ipsum'),
- * ])
- *
- * console.log(myElement)
- * // {
- * //   $$typeof: Symbol(react.element),
- * //   type: 'div',
- * //   props: {
- * //     children: [
- * //       { $$typeof: Symbol(react.element), type: 'h1', props: { children: 'I am a heading' } },
- * //       { $$typeof: Symbol(react.element), type: 'p', props: { children: 'heyo' } },
- * //       { $$typeof: Symbol(react.element), type: 'p', props: { children: 'heyo' } },
- * //     ],
- * //   },
- * // }
+ * {
+ *   const ReactElement = Arche(React)
+ *   const H1 = ReactElement('h1')
+ *   const myH1ReactElement = H1('React Title')
+ *   ReactDOM.render(myH1ReactElement, document.getElementById('react-root'))
+ * }
  * ```
  *
- * Create dynamic components with props:
- * ```javascript [playground]
- * const ReactElement = Arche(React)
- * const { Div, P, Button } = ReactElement
- *
- * const UserCard = ReactElement(({
- *   firstName, lastName, age,
- * }) => Div([
- *   H1(`${firstName} ${lastName}`),
- *   P({ style: { color: 'lightgrey' } }, [age]),
- * ]))
- * ```
- *
- * Complete interop with React hooks (converted from [this example](https://reactjs.org/docs/hooks-intro.html)):
- * ```javascript [playground]
- * const ReactElement = Arche(React)
- * const { Div, P, Button } = ReactElement
- * const { useState } = React
- *
- * const Example = ReactElement(() => {
- *   const [count, setCount] = useState(0)
- *
- *   return Div([
- *     P(`You clicked ${count} times`),
- *     Button({
- *       onClick() {
- *         setCount(count + 1)
- *       },
- *     }, 'Click me'),
- *   ])
- * })
- * ```
  */
 
 const Arche = function (creator, options = {}) {
-  if (creator == null && typeof document != 'undefined') {
-    creator = document
-  }
-
   if (creator == null) {
     throw new TypeError('creator not defined')
   }
