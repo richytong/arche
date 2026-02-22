@@ -51,12 +51,12 @@ npm i arche
 with browser script, sets `window.Arche`
 
 ```html
-<script src="https://unpkg.com/arche"></script>
+<script src="https://cdn.jsdelivr.net/npm/arche"></script>
 ```
 
 with [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
 ```javascript
-import Arche from 'https://unpkg.com/arche/es.js'
+import Arche from 'https://cdn.jsdelivr.net/npm/arche/es.js'
 ```
 
 Set `DocumentElement` globally for a better developer experience.
