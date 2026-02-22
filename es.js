@@ -1,8 +1,9 @@
 /**
  * Arche v1.0.1
- * https://github.com/richytong/arche
- * (c) 2026 Richard Tong
- * Arche may be freely distributed under the MIT license.
+ * https://arche.gallery/
+ *
+ * © Richard Yufei Tong, King of Software
+ * Arche may be freely distributed under the CFOSS license.
  */
 
 const isArray = Array.isArray
