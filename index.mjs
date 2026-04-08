@@ -1,7 +1,6 @@
 /**
- * Arche v1.0.3
+ * Arche
  * https://arche.gallery/
- *
  * © Richard Yufei Tong, King of Software
  * Arche may be freely distributed under the CFOSS license.
  */

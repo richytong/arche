@@ -217,7 +217,7 @@ Pull requests should provide some basic context and link the relevant issue. If 
 For more information please see [CONTRIBUTING.md](https://github.com/richytong/arche/blob/master/CONTRIBUTING.md)
 
 # License
-Arche is [MIT Licensed](https://github.com/a-synchronous/rubico/blob/master/LICENSE).
+Arche is distributed under the [CFOSS License](https://cloutsworld.com/en-us/legal/license/cfoss).
 
 # Support
  * minimum Node.js version: 14
