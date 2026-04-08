@@ -2,6 +2,8 @@
 ![arche-logo](https://raw.githubusercontent.com/a-synchronous/assets/master/arche-logo-226x226.png)
 > Arche (/ˈɑːrki/; Ancient Greek: ἀρχή) is a Greek word with primary senses "beginning", "origin" or "source of action" (ἐξ' ἀρχῆς: from the beginning, οr ἐξ' ἀρχῆς λόγος: the original argument), and later "first principle" or "element".
 
+License: [CFOSS](https://cloutsworld.com/en-us/legal/license/cfoss)
+
 ![Node.js CI](https://github.com/richytong/arche/actions/workflows/nodejs.yml/badge.svg)
 [![codecov](https://codecov.io/gh/richytong/arche/branch/master/graph/badge.svg)](https://codecov.io/gh/richytong/arche)
 [![npm version](https://img.shields.io/npm/v/arche.svg?style=flat)](https://www.npmjs.com/package/arche)
