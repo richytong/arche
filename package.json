@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "HTML as JavaScript",
   "author": "Richard Tong",
-  "license": "MIT",
+  "license": "CFOSS",
   "main": "index.js",
   "repository": {
     "type": "git",
