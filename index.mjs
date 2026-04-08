@@ -1,5 +1,5 @@
 /**
- * Arche v1.0.2
+ * Arche v1.0.3
  * https://arche.gallery/
  *
  * © Richard Yufei Tong, King of Software
