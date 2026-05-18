@@ -9,7 +9,7 @@ License: [CFOSS](https://cloutsworld.com/en-us/legal/license/cfoss)
 [![codecov](https://codecov.io/gh/richytong/arche/branch/master/graph/badge.svg)](https://codecov.io/gh/richytong/arche)
 [![npm version](https://img.shields.io/npm/v/arche.svg?style=flat)](https://www.npmjs.com/package/arche)
 
-Simplified DOM interface / React in pure JavaScript.
+HTML as JavaScript.
 
 ```javascript [playground]
 {
